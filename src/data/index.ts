@@ -95,10 +95,10 @@ export const projects: Project[] = [
     title: "Portfolio Website",
     description:
       "A modern developer portfolio featuring glassmorphism UI, interactive particle effects, and smooth animations.",
-    image: "Projects/musicstreaming.png",
+    image: "Projects/portfolio.png",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    liveUrl: "https://example.com",
-    repoUrl: "https://github.com/yashwanthgalla",
+    liveUrl: "https://portfolioyash-xi.vercel.app/",
+    repoUrl: "https://github.com/yashwanthgalla/portfolio",
   },
   {
     id: 5,
