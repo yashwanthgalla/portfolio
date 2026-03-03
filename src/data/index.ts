@@ -55,7 +55,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "HTML" },
       { name: "Firebase" },
       { name: "Cloudflare" },
-
+      { name: "Jenkins" },
     ],
   },
 ];
