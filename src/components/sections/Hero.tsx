@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <Suspense fallback={null}>
           <Antigravity
-            count={200}
+            count={300}
             magnetRadius={6}
             ringRadius={7}
             waveSpeed={0.4}
@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.5 }}
-          className="text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl lg:text-6xl"
+          className="text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl lg:text-6xl whitespace-nowrap"
         >
           <VariableProximity
             label="Galla Naga Yashwanth"
