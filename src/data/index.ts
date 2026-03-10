@@ -187,6 +187,13 @@ export const designItems: DesignItem[] = [
     image: "Cad/large.png",
     description: "Detailed 3D architectural visualization of a modern building.",
   },
+  {
+    id: 10,
+    title: "Diet Coke",
+    category: "poster",
+    image: "posters/DietCoke.png",
+    description: "A vibrant poster celebrating the iconic Diet Coke brand with a modern twist.",
+  }
   
 ];
 

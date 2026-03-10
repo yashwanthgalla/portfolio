@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-6 py-4 md:flex-row md:justify-between">
         <p className="text-sm text-text-muted">
-          &copy; {year} Your Name. All rights reserved.
+          &copy; {year} Naga Yashwanth Galla. All rights reserved.
         </p>
 
         <div className="flex gap-3">

@@ -104,9 +104,9 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.55 }}
           className="mx-auto mt-6 max-w-lg leading-relaxed text-black/70"
         >
-          I craft modern, performant web applications with clean code and
-          thoughtful design. Focused on creating experiences that are both
-          beautiful and functional.
+          Hello, I’m Yashwanth, a third-year Computer Science student passionate about software development and problem solving, with a strong interest in data structures, algorithms, and full-stack development.
+          I work mainly with Python, JavaScript, and TypeScript, and recently built a real-time chat application using React, TypeScript, and Firebase to explore real-time communication and scalable systems.
+          I also regularly practice DSA on platforms like LeetCode and CodeChef, and I’m eager to apply my skills and grow as a software engineer
         </motion.p>
 
         {/* Buttons */}
