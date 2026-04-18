@@ -48,7 +48,6 @@ export const skillCategories: SkillCategory[] = [
       { name: "Figma" },
       { name: "Docker" },
       { name: "Python (Basic)" },
-      { name: "npm" },
       { name: "Kubernetes" },
       { name: "C" },
       { name: "Java" },
@@ -158,6 +157,13 @@ export const designItems: DesignItem[] = [
     category: "poster",
     image: "posters/senku.png",
     description: "An anime-inspired poster featuring Senku Ishigami from Dr. Stone, the genius scientist.",
+  },
+  {
+    id: 6,
+    title: "Logo",
+    category: "poster",
+    image: "posters/banner.png",
+    description: "Newly Made logo for everything im going to build in future",
   },
   {
     id: 6,
