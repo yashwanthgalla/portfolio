@@ -29,10 +29,14 @@ const About: React.FC = () => (
         className="mx-auto mb-16 max-w-2xl text-center"
       >
         <p className="leading-relaxed text-text-secondary">
-          I&apos;m a Full Stack Developer who builds modern web applications.
-          I turn ideas into elegant, performant digital products — with strong
-          foundations in both frontend and backend technologies, I deliver
-          end-to-end solutions that solve real problems.
+          Hello, I&apos;m Yashwanth, a third-year Computer Science student passionate
+          about software development and problem solving, with a strong interest
+          in data structures, algorithms, and full-stack development. I mainly
+          work with Python, JavaScript, and TypeScript, and recently built a
+          real-time chat application using React, TypeScript, and Firebase to
+          explore real-time communication and scalable systems. I regularly
+          practice DSA on platforms like LeetCode and CodeChef, and I&apos;m eager
+          to keep applying my skills and growing as a software engineer.
         </p>
       </motion.div>
 
@@ -40,7 +44,7 @@ const About: React.FC = () => (
       <div className="grid gap-6 md:grid-cols-3">
         {skillCategories.map((cat) => (
           <GlassCard key={cat.title}>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-accent">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
               {cat.title}
             </h3>
             <motion.div

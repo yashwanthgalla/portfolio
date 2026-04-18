@@ -12,7 +12,7 @@ export const navLinks: NavLink[] = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
-  { label: "Designs", href: "#designs" },
+  { label: "Designing", href: "#designs" },
   { label: "Profiles", href: "#profiles" },
   { label: "Contact", href: "#contact" },
 ];
@@ -47,7 +47,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "AWS" },
       { name: "Figma" },
       { name: "Docker" },
-      { name: "Vite" },
+      { name: "Python (Basic)" },
       { name: "npm" },
       { name: "Kubernetes" },
       { name: "C" },
@@ -188,13 +188,47 @@ export const designItems: DesignItem[] = [
     description: "Detailed 3D architectural visualization of a modern building.",
   },
   {
+    id: 12,
+    title: "3D Fan",
+    category: "cad",
+    image: "Cad/fan.png",
+    description: "A CAD model study of a fan assembly with clean mechanical detailing.",
+  },
+  {
+    id: 13,
+    title: "Headset Model",
+    category: "cad",
+    image: "Cad/headset.png",
+    description: "A product-style CAD model of a headset focused on form and proportions.",
+  },
+  {
+    id: 14,
+    title: "Holder Model",
+    category: "cad",
+    image: "Cad/holdmodel.png",
+    description: "A functional CAD holder concept modeled with practical geometry and structure.",
+  },
+  {
+    id: 15,
+    title: "Spinner Model",
+    category: "cad",
+    image: "Cad/spinf.png",
+    description: "A compact CAD spinner concept emphasizing symmetry and smooth curves.",
+  },
+  {
     id: 10,
     title: "Diet Coke",
     category: "poster",
     image: "posters/DietCoke.png",
     description: "A vibrant poster celebrating the iconic Diet Coke brand with a modern twist.",
+  },
+  {
+    id: 11,
+    title: "Shreyas",
+    category: "poster",
+    image: "posters/shreyas.png",
+    description: "A new poster featuring Shreyas with a bold, high-contrast composition.",
   }
-  
 ];
 
 /* ── Coding Profiles ──────────────────────────────────── */

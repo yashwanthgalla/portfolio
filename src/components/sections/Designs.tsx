@@ -7,15 +7,7 @@ import TiltedCard from "../ui/TiltedCard";
 import { designItems } from "../../data";
 import type { DesignItem } from "../../types";
 
-const categoryLabels: Record<string, string> = {
-  all: "All",
-  poster: "Posters",
-  graphic: "Graphics",
-  cad: "CAD Models",
-};
-
 const Designs: React.FC = () => {
-  const [filter, setFilter] = useState<string>("all");
   const [selected, setSelected] = useState<DesignItem | null>(null);
 
   const posterItems = useMemo(
@@ -26,44 +18,31 @@ const Designs: React.FC = () => {
     []
   );
 
-  const gridItems =
-    filter === "all"
-      ? designItems.filter((d) => d.category !== "poster")
-      : filter === "poster"
-        ? []
-        : designItems.filter((d) => d.category === filter);
+  const gridItems = useMemo(
+    () => designItems.filter((d) => d.category !== "poster"),
+    []
+  );
 
-  const showGallery = filter === "all" || filter === "poster";
+  const showGallery = posterItems.length > 0;
 
   return (
     <section id="designs" className="py-24">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
-          title="Design & CAD"
+          title="Designing"
           subtitle="Creative work spanning posters, graphics, and CAD modeling."
         />
-
-        {/* Filter buttons */}
-        <div className="mb-12 flex flex-wrap justify-center gap-2">
-          {Object.entries(categoryLabels).map(([key, label]) => (
-            <button
-              key={key}
-              onClick={() => setFilter(key)}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                filter === key
-                  ? "bg-primary text-white"
-                  : "border border-border text-text-secondary hover:border-primary hover:text-primary"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Circular Gallery for Posters — full bleed edge-to-edge */}
       {showGallery && (
-        <div className="relative mb-12 h-[500px] w-full overflow-hidden">
+        <div className="mb-4 text-center">
+          <h3 className="text-xl font-semibold text-primary">Posters</h3>
+        </div>
+      )}
+
+      {showGallery && (
+        <div className="relative mb-16 h-125 w-full overflow-hidden">
           <CircularGallery
             items={posterItems}
             bend={1}
@@ -78,10 +57,15 @@ const Designs: React.FC = () => {
 
       <div className="mx-auto max-w-6xl px-6">
         {gridItems.length > 0 && (
-          <motion.div
-            layout
-            className="grid gap-8 sm:grid-cols-2"
-          >
+          <>
+            <div className="mb-8 text-center">
+              <h3 className="text-xl font-semibold text-primary">Modelling</h3>
+            </div>
+
+            <motion.div
+              layout
+              className="grid gap-8 sm:grid-cols-2"
+            >
             <AnimatePresence mode="popLayout">
               {gridItems.map((item) => (
                 <motion.div
@@ -113,7 +97,8 @@ const Designs: React.FC = () => {
                 </motion.div>
               ))}
             </AnimatePresence>
-          </motion.div>
+            </motion.div>
+          </>
         )}
 
         {/* Modal */}
