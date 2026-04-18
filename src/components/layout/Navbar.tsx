@@ -57,9 +57,14 @@ const Navbar: React.FC = () => {
         <a
           href="#hero"
           onClick={(e) => { e.preventDefault(); handleNav("#hero"); }}
-          className="text-lg font-semibold tracking-tight text-primary"
+          className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight text-primary"
         >
-          Portfolio
+          <img
+            src="/posters/banner.png"
+            alt="Portfolio logo"
+            className="h-7 w-7 rounded object-cover"
+          />
+          <span>Portfolio</span>
         </a>
 
         {/* Desktop links + local timer */}
