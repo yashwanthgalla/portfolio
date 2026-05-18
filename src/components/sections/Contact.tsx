@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiCheckCircle } from "react-icons/hi";
@@ -17,10 +17,26 @@ const socialIconMap: Record<string, React.ReactNode> = {
 };
 
 const Contact: React.FC = () => {
-  const [state, handleSubmit] = useForm("xkovlper");
+  const [state, handleSubmit, reset] = useForm("xkovlper");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (state.succeeded) {
+      setName("");
+      setEmail("");
+      setMessage("");
+      
+      const timer = setTimeout(() => {
+        if (typeof reset === 'function') {
+          reset();
+        }
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded, reset]);
 
   const inputBase =
     "w-full rounded-lg border bg-white px-4 py-2.5 text-sm text-primary outline-none transition-all placeholder:text-text-muted focus:border-accent focus:ring-1 focus:ring-accent/30 border-border";
@@ -108,8 +124,8 @@ const Contact: React.FC = () => {
                 exit={{ opacity: 0 }}
                 className="mt-4 flex items-center gap-2 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-700"
               >
-                <HiCheckCircle className="shrink-0" />
-                Message sent! I&apos;ll get back to you soon.
+                <HiCheckCircle className="shrink-0 text-lg" />
+                Thanks for reaching out !! Will get back to you soon
               </motion.div>
             )}
           </AnimatePresence>

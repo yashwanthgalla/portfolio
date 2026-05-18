@@ -2,38 +2,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { navLinks } from "../../data";
-import {
-  formatViewerTime,
-  getViewerLocationContext,
-  type ViewerLocationContext,
-} from "../../services/locationService";
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [viewerContext, setViewerContext] = useState<ViewerLocationContext>(() =>
-    getViewerLocationContext()
-  );
-  const [currentTime, setCurrentTime] = useState<string>(() =>
-    formatViewerTime(getViewerLocationContext())
-  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const context = getViewerLocationContext();
-    setViewerContext(context);
-    setCurrentTime(formatViewerTime(context, new Date(), false));
-
-    const timer = window.setInterval(() => {
-      setCurrentTime(formatViewerTime(context, new Date(), false));
-    }, 1000);
-
-    return () => window.clearInterval(timer);
   }, []);
 
   const handleNav = (href: string) => {
@@ -46,11 +23,10 @@ const Navbar: React.FC = () => {
       initial={{ y: -80 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.4 }}
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled
           ? "border-b border-border bg-white/90 backdrop-blur-md"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <nav className="flex w-full items-center justify-between px-6 py-4">
         {/* Logo */}
@@ -67,7 +43,7 @@ const Navbar: React.FC = () => {
           <span>Portfolio</span>
         </a>
 
-        {/* Desktop links + local timer */}
+        {/* Desktop links */}
         <div className="hidden items-center gap-6 md:flex">
           <ul className="flex items-center gap-8">
             {navLinks.map((link) => (
@@ -82,14 +58,6 @@ const Navbar: React.FC = () => {
               </li>
             ))}
           </ul>
-
-          <div
-            className="font-mono text-sm font-semibold tabular-nums text-primary"
-            title={`Local time (${viewerContext.timeZone})`}
-            aria-label="Local time"
-          >
-            {currentTime}
-          </div>
         </div>
 
         {/* Mobile toggle */}

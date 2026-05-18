@@ -4,25 +4,41 @@ import {
   Hero,
   About,
   Projects,
+  Certifications,
   CodingProfiles,
   Contact,
 } from "./components/sections";
+import { ScrollReveal, CustomCursor } from "./components/ui";
 
 const Designs = lazy(() => import("./components/sections/Designs"));
 
 function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Projects />
-        <Suspense fallback={<div className="py-24" />}>
-          <Designs />
-        </Suspense>
-        <CodingProfiles />
-        <Contact />
+        <ScrollReveal>
+          <About />
+        </ScrollReveal>
+        <ScrollReveal>
+          <Projects />
+        </ScrollReveal>
+        <ScrollReveal>
+          <Suspense fallback={<div className="py-24" />}>
+            <Designs />
+          </Suspense>
+        </ScrollReveal>
+        <ScrollReveal>
+          <Certifications />
+        </ScrollReveal>
+        <ScrollReveal>
+          <CodingProfiles />
+        </ScrollReveal>
+        <ScrollReveal>
+          <Contact />
+        </ScrollReveal>
       </main>
       <Footer />
       <ScrollToTop />

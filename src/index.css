@@ -34,12 +34,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 /* ── Subtle card surface ──────────────────────────────── */
 .card-surface {
   background: #ffffff;
   border: 1px solid var(--color-border);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card-surface:hover {
   border-color: #d1d5db;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
@@ -55,13 +57,16 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #d1d5db;
   border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }
@@ -186,6 +191,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -13,6 +13,7 @@ export const navLinks: NavLink[] = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Designing", href: "#designs" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Profiles", href: "#profiles" },
   { label: "Contact", href: "#contact" },
 ];
@@ -160,13 +161,6 @@ export const designItems: DesignItem[] = [
   },
   {
     id: 6,
-    title: "Logo",
-    category: "poster",
-    image: "posters/banner.png",
-    description: "Newly Made logo for everything im going to build in future",
-  },
-  {
-    id: 6,
     title: "3D Flower Vase",
     category: "cad",
     image: "Cad/flowervase.png",
@@ -268,11 +262,18 @@ export const codingProfiles: CodingProfile[] = [
     username: "@KLU2300031794",
   },
   {
-    name: "Linked In",
+    name: "LinkedIn",
     url: "https://www.linkedin.com/in/galla-naga-yashwanth-7776732b3/",
     icon: "linkedin",
     color: "#0077B5",
     username: "@yashwanthgalla",
+  },
+  {
+    name: "Credly",
+    url: "https://www.credly.com/users/naga-yashwanth-galla",
+    icon: "credly",
+    color: "#FF6B00",
+    username: "@naga-yashwanth-galla",
   },
 ];
 

@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-// @ts-expect-error — ScrollFloat is a plain JSX component without type declarations
-import ScrollFloat from "../ScrollFloat";
 
 interface SectionHeadingProps {
   title: string;
@@ -9,17 +7,9 @@ interface SectionHeadingProps {
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle }) => (
   <div className="mb-16 text-center">
-    <ScrollFloat
-      containerClassName="!my-0"
-      textClassName="!text-3xl md:!text-4xl font-semibold tracking-tight text-primary !leading-tight"
-      animationDuration={0.8}
-      ease="back.inOut(1.5)"
-      scrollStart="top bottom"
-      scrollEnd="center center"
-      stagger={0.03}
-    >
+    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-primary leading-tight">
       {title}
-    </ScrollFloat>
+    </h2>
     {subtitle && (
       <motion.p
         initial={{ opacity: 0, y: 10 }}

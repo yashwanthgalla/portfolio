@@ -28,15 +28,11 @@ const About: React.FC = () => (
         transition={{ duration: 0.5 }}
         className="mx-auto mb-16 max-w-2xl text-center"
       >
+        <p className="leading-relaxed text-text-secondary mb-4">
+          I&apos;m Yashwanth, Computer Science student with a strong passion for software engineering, problem solving, and building scalable applications. I enjoy working across both frontend and backend technologies, with experience in Python, JavaScript, and TypeScript. Recently, I developed a real-time chat application using React, TypeScript, and Firebase, focusing on real-time communication, responsive UI, and scalable architecture.
+        </p>
         <p className="leading-relaxed text-text-secondary">
-          Hello, I&apos;m Yashwanth, a third-year Computer Science student passionate
-          about software development and problem solving, with a strong interest
-          in data structures, algorithms, and full-stack development. I mainly
-          work with Python, JavaScript, and TypeScript, and recently built a
-          real-time chat application using React, TypeScript, and Firebase to
-          explore real-time communication and scalable systems. I regularly
-          practice DSA on platforms like LeetCode and CodeChef, and I&apos;m eager
-          to keep applying my skills and growing as a software engineer.
+          I actively strengthen my problem-solving skills through Data Structures and Algorithms practice on platforms like LeetCode and CodeChef. I&apos;m continuously exploring modern web technologies, improving my development workflow, and learning how to design efficient, user-focused software solutions. My goal is to grow into a versatile software engineer who can contribute to impactful and innovative products.
         </p>
       </motion.div>
 

@@ -66,37 +66,37 @@ const Designs: React.FC = () => {
               layout
               className="grid gap-8 sm:grid-cols-2"
             >
-            <AnimatePresence mode="popLayout">
-              {gridItems.map((item) => (
-                <motion.div
-                  layout
-                  key={item.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-center"
-                >
-                  <div onClick={() => setSelected(item)} className="cursor-pointer">
-                    <TiltedCard
-                      imageSrc={item.image}
-                      altText={item.title}
-                      captionText={item.title}
-                      containerHeight="320px"
-                      containerWidth="100%"
-                      imageHeight="280px"
-                      imageWidth="280px"
-                      rotateAmplitude={12}
-                      scaleOnHover={1.05}
-                      showTooltip={true}
-                      showMobileWarning={false}
-                    />
-                  </div>
-                  <p className="mt-2 text-sm font-medium text-primary">{item.title}</p>
-                  <p className="text-xs text-text-muted capitalize">{item.category}</p>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+              <AnimatePresence mode="popLayout">
+                {gridItems.map((item) => (
+                  <motion.div
+                    layout
+                    key={item.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col items-center"
+                  >
+                    <div onClick={() => setSelected(item)} className="cursor-pointer">
+                      <TiltedCard
+                        imageSrc={item.image}
+                        altText={item.title}
+                        captionText={item.title}
+                        containerHeight="320px"
+                        containerWidth="100%"
+                        imageHeight="280px"
+                        imageWidth="280px"
+                        rotateAmplitude={12}
+                        scaleOnHover={1.05}
+                        showTooltip={true}
+                        showMobileWarning={false}
+                      />
+                    </div>
+                    <p className="mt-2 text-sm font-medium text-primary">{item.title}</p>
+                    <p className="text-xs text-text-muted capitalize">{item.category}</p>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </motion.div>
           </>
         )}
