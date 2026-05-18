@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
             </button>
 
             <a
-              href="/Resume.pdf"
+              href="/Resume(18 May).pdf"
               download
               className="inline-flex items-center gap-2 rounded-lg border border-black/10 bg-white/60 px-5 py-2.5 text-sm font-medium text-black transition-all hover:bg-white/80"
             >
