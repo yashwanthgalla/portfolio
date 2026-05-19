@@ -1,6 +1,5 @@
 import type {
   NavLink,
-  SkillCategory,
   Project,
   DesignItem,
   CodingProfile,
@@ -18,47 +17,7 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#contact" },
 ];
 
-/* ── Skills ───────────────────────────────────────────── */
-export const skillCategories: SkillCategory[] = [
-  {
-    title: "Frontend",
-    skills: [
-      { name: "React" },
-      { name: "TypeScript" },
-      { name: "JavaScript" },
-      { name: "HTML5" },
-      { name: "CSS3" },
-      { name: "Tailwind CSS" },
-      { name: "Next.js" },
-    ],
-  },
-  {
-    title: "Backend",
-    skills: [
-      { name: "Node.js" },
-      { name: "MongoDB" },
-      { name: "PostgreSQL" },
-      { name: "REST APIs" },
-    ],
-  },
-  {
-    title: "Tools & Others",
-    skills: [
-      { name: "Git & GitHub" },
-      { name: "AWS" },
-      { name: "Figma" },
-      { name: "Docker" },
-      { name: "Python (Basic)" },
-      { name: "Kubernetes" },
-      { name: "C" },
-      { name: "Java" },
-      { name: "HTML" },
-      { name: "Firebase" },
-      { name: "Cloudflare" },
-      { name: "Jenkins" },
-    ],
-  },
-];
+
 export const projects: Project[] = [
   {
     id: 1,
@@ -282,6 +241,6 @@ export const socialLinks: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/yashwanthgalla", icon: "github" },
   { name: "LinkedIn", url: "https://linkedin.com/in/yashwanthgalla", icon: "linkedin" },
   { name: "Twitter", url: "https://x.com/yashwanth_galla", icon: "twitter" },
-  { name: "Instagram", url: "https://instagram.com/imroo45", icon: "instagram" },
+  { name: "Instagram", url: "https://instagram.com/_yashwanth.45", icon: "instagram" },
   { name: "Email", url: "mailto:nagayashwanthgalla@gmail.com", icon: "email" },
 ];

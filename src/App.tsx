@@ -9,14 +9,14 @@ import {
   Contact,
   Hackathons,
 } from "./components/sections";
-import { ScrollReveal, CustomCursor } from "./components/ui";
+import { ScrollReveal } from "./components/ui";
 
 const Designs = lazy(() => import("./components/sections/Designs"));
 
 function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      <CustomCursor />
+
       <Navbar />
       <main>
         <Hero />
