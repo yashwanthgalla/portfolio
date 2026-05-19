@@ -1,4 +1,4 @@
-import { SectionHeading } from "../ui";
+import { SectionHeading, ScrollReveal } from "../ui";
 import ProjectCard from "./ProjectCard";
 import { projects } from "../../data";
 
@@ -11,8 +11,10 @@ const Projects: React.FC = () => (
       />
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <ProjectCard key={p.id} project={p} />
+        {projects.map((p, i) => (
+          <ScrollReveal key={p.id} delay={i * 0.1}>
+            <ProjectCard project={p} />
+          </ScrollReveal>
         ))}
       </div>
     </div>

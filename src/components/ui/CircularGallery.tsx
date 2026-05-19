@@ -265,6 +265,7 @@ class GalleryApp {
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+    this.isVisible = true;
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -273,6 +274,21 @@ class GalleryApp {
     this.createMedias(items, bend, textColor, borderRadius, font);
     this.update();
     this.addEventListeners();
+
+    this.observer = new IntersectionObserver(([entry]) => {
+      this.isVisible = entry.isIntersecting;
+      if (entry.isIntersecting) {
+        if (!this.raf) {
+          this.update();
+        }
+      } else {
+        if (this.raf) {
+          window.cancelAnimationFrame(this.raf);
+          this.raf = null;
+        }
+      }
+    });
+    this.observer.observe(this.container);
   }
   createRenderer() {
     this.renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 2) });
@@ -358,7 +374,12 @@ class GalleryApp {
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
-    this.raf = window.requestAnimationFrame(this.update.bind(this));
+    
+    if (this.isVisible) {
+      this.raf = window.requestAnimationFrame(this.update.bind(this));
+    } else {
+      this.raf = null;
+    }
   }
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
@@ -378,6 +399,7 @@ class GalleryApp {
   }
   destroy() {
     window.cancelAnimationFrame(this.raf);
+    if (this.observer) this.observer.disconnect();
     window.removeEventListener('resize', this.boundOnResize);
     window.removeEventListener('mousewheel', this.boundOnWheel);
     window.removeEventListener('wheel', this.boundOnWheel);

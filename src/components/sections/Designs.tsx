@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiX } from "react-icons/hi";
-import { SectionHeading } from "../ui";
+import { SectionHeading, ScrollReveal } from "../ui";
 import CircularGallery from "../ui/CircularGallery";
 import TiltedCard from "../ui/TiltedCard";
 import { designItems } from "../../data";
@@ -36,47 +36,54 @@ const Designs: React.FC = () => {
 
       {/* Circular Gallery for Posters — full bleed edge-to-edge */}
       {showGallery && (
-        <div className="mb-4 text-center">
-          <h3 className="text-xl font-semibold text-primary">Posters</h3>
-        </div>
+        <ScrollReveal>
+          <div className="mb-4 text-center">
+            <h3 className="text-xl font-semibold text-primary">Posters</h3>
+          </div>
+        </ScrollReveal>
       )}
 
       {showGallery && (
-        <div className="relative mb-16 h-125 w-full overflow-hidden">
-          <CircularGallery
-            items={posterItems}
-            bend={1}
-            textColor="#111827"
-            borderRadius={0.05}
-            font="bold 30px Inter"
-            scrollSpeed={2}
-            scrollEase={0.05}
-          />
-        </div>
+        <ScrollReveal>
+          <div className="relative mb-16 h-125 w-full overflow-hidden">
+            <CircularGallery
+              items={posterItems}
+              bend={1}
+              textColor="#111827"
+              borderRadius={0.05}
+              font="bold 30px Inter"
+              scrollSpeed={2}
+              scrollEase={0.05}
+            />
+          </div>
+        </ScrollReveal>
       )}
 
       <div className="mx-auto max-w-6xl px-6">
         {gridItems.length > 0 && (
           <>
-            <div className="mb-8 text-center">
-              <h3 className="text-xl font-semibold text-primary">Modelling</h3>
-            </div>
+            <ScrollReveal>
+              <div className="mb-8 text-center">
+                <h3 className="text-xl font-semibold text-primary">Modelling</h3>
+              </div>
+            </ScrollReveal>
 
             <motion.div
               layout
               className="grid gap-8 sm:grid-cols-2"
             >
               <AnimatePresence mode="popLayout">
-                {gridItems.map((item) => (
-                  <motion.div
-                    layout
-                    key={item.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex flex-col items-center"
-                  >
+                {gridItems.map((item, i) => (
+                  <ScrollReveal key={item.id} delay={i * 0.1}>
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex flex-col items-center"
+                    >
                     <div onClick={() => setSelected(item)} className="cursor-pointer">
                       <TiltedCard
                         imageSrc={item.image}
@@ -94,7 +101,8 @@ const Designs: React.FC = () => {
                     </div>
                     <p className="mt-2 text-sm font-medium text-primary">{item.title}</p>
                     <p className="text-xs text-text-muted capitalize">{item.category}</p>
-                  </motion.div>
+                    </motion.div>
+                  </ScrollReveal>
                 ))}
               </AnimatePresence>
             </motion.div>

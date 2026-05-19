@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function useCurrentFrame() {
+function useCurrentFrame(isVisible: boolean) {
   const [frame, setFrame] = useState(0);
 
   useEffect(() => {
+    if (!isVisible) return;
     let animationFrameId: number;
     
     const loop = () => {
@@ -16,7 +17,7 @@ function useCurrentFrame() {
     animationFrameId = requestAnimationFrame(loop);
     
     return () => cancelAnimationFrame(animationFrameId);
-  }, []);
+  }, [isVisible]);
 
   return frame;
 }
@@ -64,7 +65,19 @@ export function PerspectiveMarquee({
   speed = 1,
   className,
 }: PerspectiveMarqueeProps) {
-  const frame = useCurrentFrame() * speed;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const frame = useCurrentFrame(isVisible) * speed;
 
   const itemPadding = fontSize * 0.9;
   const approxItemWidth = items.reduce(
@@ -77,6 +90,7 @@ export function PerspectiveMarquee({
 
   return (
     <div
+      ref={containerRef}
       className={className}
       style={{
         position: "absolute",

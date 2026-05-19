@@ -20,29 +20,15 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <ScrollReveal>
-          <About />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Projects />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Suspense fallback={<div className="py-24" />}>
-            <Designs />
-          </Suspense>
-        </ScrollReveal>
-        <ScrollReveal>
-          <Certifications />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Hackathons />
-        </ScrollReveal>
-        <ScrollReveal>
-          <CodingProfiles />
-        </ScrollReveal>
-        <ScrollReveal>
-          <Contact />
-        </ScrollReveal>
+        <About />
+        <Projects />
+        <Suspense fallback={<div className="py-24" />}>
+          <Designs />
+        </Suspense>
+        <Certifications />
+        <Hackathons />
+        <CodingProfiles />
+        <Contact />
       </main>
       <Footer />
       <ScrollToTop />

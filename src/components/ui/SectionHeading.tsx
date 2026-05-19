@@ -7,9 +7,15 @@ interface SectionHeadingProps {
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({ title, subtitle }) => (
   <div className="mb-16 text-center">
-    <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-primary leading-tight">
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="text-3xl md:text-4xl font-semibold tracking-tight text-primary leading-tight"
+    >
       {title}
-    </h2>
+    </motion.h2>
     {subtitle && (
       <motion.p
         initial={{ opacity: 0, y: 10 }}
