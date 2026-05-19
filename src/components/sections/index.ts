@@ -5,3 +5,4 @@ export { default as Designs } from "./Designs";
 export { default as Certifications } from "./Certifications";
 export { default as CodingProfiles } from "./CodingProfiles";
 export { default as Contact } from "./Contact";
+export { default as Hackathons } from "./Hackathons";

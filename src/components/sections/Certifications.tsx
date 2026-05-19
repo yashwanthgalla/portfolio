@@ -59,18 +59,40 @@ const Certifications: React.FC = () => {
             >
               <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
                 {/* Badge */}
-                <a
-                  href={cert.credlyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 transition-transform hover:scale-105"
-                >
-                  <img
-                    src={cert.badgeImage}
-                    alt={`${cert.title} Badge`}
-                    className="h-28 w-28 object-contain drop-shadow-md"
-                  />
-                </a>
+                {cert.credlyUrl ? (
+                  <a
+                    href={cert.credlyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 transition-transform hover:scale-105"
+                  >
+                    {cert.badgeImage ? (
+                      <img
+                        src={cert.badgeImage}
+                        alt={`${cert.title} Badge`}
+                        className="h-28 w-28 object-contain drop-shadow-md"
+                      />
+                    ) : (
+                      <div className="flex h-28 w-28 items-center justify-center rounded-xl bg-black/5 drop-shadow-md">
+                        <HiAcademicCap className="text-4xl text-text-muted" />
+                      </div>
+                    )}
+                  </a>
+                ) : (
+                  <div className="shrink-0 transition-transform hover:scale-105">
+                    {cert.badgeImage ? (
+                      <img
+                        src={cert.badgeImage}
+                        alt={`${cert.title} Badge`}
+                        className="h-28 w-28 object-contain drop-shadow-md"
+                      />
+                    ) : (
+                      <div className="flex h-28 w-28 items-center justify-center rounded-xl bg-black/5 drop-shadow-md">
+                        <HiAcademicCap className="text-4xl text-text-muted" />
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Details */}
                 <div className="flex-1 text-center sm:text-left">
@@ -92,15 +114,17 @@ const Certifications: React.FC = () => {
                         {doc.label}
                       </button>
                     ))}
-                    <a
-                      href={cert.credlyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-lg border border-black/10 bg-white/60 px-3.5 py-2 text-xs font-medium text-black backdrop-blur-sm transition-all hover:bg-white/80 hover:shadow-sm"
-                    >
-                      <HiExternalLink className="text-sm" />
-                      View on Credly
-                    </a>
+                    {cert.credlyUrl && (
+                      <a
+                        href={cert.credlyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-black/10 bg-white/60 px-3.5 py-2 text-xs font-medium text-black backdrop-blur-sm transition-all hover:bg-white/80 hover:shadow-sm"
+                      >
+                        <HiExternalLink className="text-sm" />
+                        View on Credly
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

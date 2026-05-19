@@ -7,6 +7,7 @@ import {
   Certifications,
   CodingProfiles,
   Contact,
+  Hackathons,
 } from "./components/sections";
 import { ScrollReveal, CustomCursor } from "./components/ui";
 
@@ -32,6 +33,9 @@ function App() {
         </ScrollReveal>
         <ScrollReveal>
           <Certifications />
+        </ScrollReveal>
+        <ScrollReveal>
+          <Hackathons />
         </ScrollReveal>
         <ScrollReveal>
           <CodingProfiles />
