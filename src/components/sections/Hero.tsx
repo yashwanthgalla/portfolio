@@ -6,10 +6,10 @@ import DotField from "../../components/DotField";
 
 const heroTags = [
   "Full Stack Developer",
-  "Backend Engineer",
-  "Cloud Engineer",
-  "Frontend Engineer",
-  "DevOps Engineer",
+  "Frontend Developer",
+  "Backend Developer",
+  "React & Next.js Developer",
+  "Cloud & DevOps Enthusiast",
 ];
 
 const Hero: React.FC = () => {
