@@ -67,6 +67,7 @@ export function PerspectiveMarquee({
 }: PerspectiveMarqueeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const [width, setWidth] = useState(1280);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -77,16 +78,31 @@ export function PerspectiveMarquee({
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const handleResize = () => {
+      if (containerRef.current) {
+        setWidth(containerRef.current.offsetWidth);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const frame = useCurrentFrame(isVisible) * speed;
 
-  const itemPadding = fontSize * 0.9;
-  const approxItemWidth = items.reduce(
-    (acc, item) => acc + item.length * fontSize * 0.6 + itemPadding,
-    0,
+  const itemPadding = fontSize * 1.1;
+  const baseItemWidths = items.map(
+    (item) => item.length * fontSize * 0.55 + itemPadding
   );
+  const approxItemWidth = baseItemWidths.reduce((acc, w) => acc + w, 0);
 
   const offset = -((frame * pixelsPerFrame) % approxItemWidth);
   const rendered = [...items, ...items, ...items];
+  const renderedItemWidths = [...baseItemWidths, ...baseItemWidths, ...baseItemWidths];
+
+  let accumulatedWidth = 0;
 
   return (
     <div
@@ -121,14 +137,15 @@ export function PerspectiveMarquee({
           }}
         >
           {rendered.map((item, i) => {
-            const itemCenter =
-              i * (approxItemWidth / items.length) +
-              approxItemWidth / items.length / 2 +
-              offset;
-            const norm = (itemCenter - 640) / 640;
+            const itemWidth = renderedItemWidths[i];
+            const itemCenter = accumulatedWidth + itemWidth / 2 + offset;
+            accumulatedWidth += itemWidth;
+
+            const halfWidth = width / 2;
+            const norm = (itemCenter - halfWidth) / halfWidth;
             const distance = Math.min(1, Math.abs(norm));
-            const blurPx = distance * 6;
-            const opacity = 1 - distance * 0.4;
+            const blurPx = distance * 3.5;
+            const opacity = 1 - distance * 0.65;
 
             return (
               <span
@@ -139,10 +156,11 @@ export function PerspectiveMarquee({
                   fontSize,
                   fontWeight,
                   color,
-                  letterSpacing: "-0.03em",
+                  letterSpacing: "-0.02em",
                   paddingRight: itemPadding,
                   filter: `blur(${blurPx}px)`,
                   opacity,
+                  transition: "filter 0.05s ease, opacity 0.05s ease",
                 }}
               >
                 {item}
@@ -157,7 +175,7 @@ export function PerspectiveMarquee({
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          background: `linear-gradient(90deg, ${fadeColor} 0%, transparent 18%, transparent 82%, ${fadeColor} 100%)`,
+          background: `linear-gradient(90deg, ${fadeColor} 0%, transparent 20%, transparent 80%, ${fadeColor} 100%)`,
         }}
       />
       <div

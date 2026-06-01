@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { SectionHeading, GlassCard } from "../ui";
+import { SectionHeading, GlassCard, TiltedCard } from "../ui";
+import { FiCode, FiCpu, FiCloud } from "react-icons/fi";
 import {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiHtml5, SiCss3,
   SiNodedotjs, SiExpress, SiJsonwebtokens,
@@ -78,31 +79,111 @@ const skillCategories = [
 ];
 
 const About: React.FC = () => (
-  <section id="about" className="px-6 py-24">
+  <section id="about" className="px-6 py-24 border-t border-border/40 bg-surface-alt/20">
     <div className="mx-auto max-w-6xl">
       <SectionHeading
         title="About"
         subtitle="A brief introduction to who I am and what I do."
       />
 
-      {/* Professional summary */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mx-auto mb-16 max-w-3xl text-center"
-      >
-        <p className="leading-relaxed text-text-secondary mb-4 text-lg">
-          I&apos;m Yashwanth, a Computer Science student with a strong passion for software engineering, problem solving, and building scalable applications. I enjoy working across both frontend and backend technologies, with experience in Python, JavaScript, and TypeScript. Recently, I developed a real-time chat application using React, TypeScript, and Firebase, focusing on real-time communication, responsive UI, and scalable architecture.
-        </p>
-        <p className="leading-relaxed text-text-secondary text-lg">
-          I actively strengthen my problem-solving skills through Data Structures and Algorithms practice on platforms like LeetCode and CodeChef. I&apos;m continuously exploring modern web technologies, improving my development workflow, and learning how to design efficient, user-focused software solutions. My goal is to grow into a versatile software engineer who can contribute to impactful and innovative products.
-        </p>
-      </motion.div>
+      {/* Split Summary Layout */}
+      <div className="grid gap-12 lg:grid-cols-3 items-center mb-24">
+        {/* Left: Tilted Card Avatar */}
+        <div className="flex justify-center lg:col-span-1">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-[280px]"
+          >
+            <TiltedCard
+              imageSrc="https://avatars.githubusercontent.com/u/223609762?v=4"
+              altText="Galla Naga Yashwanth"
+              captionText="Galla Naga Yashwanth"
+              containerHeight="280px"
+              containerWidth="280px"
+              imageHeight="260px"
+              imageWidth="260px"
+              scaleOnHover={1.05}
+              rotateAmplitude={12}
+              showTooltip={true}
+              showMobileWarning={false}
+            />
+          </motion.div>
+        </div>
 
-      {/* Skills Section */}
-      {/* Skills Section Header */}
+        {/* Right: Summary & Key Pillars */}
+        <div className="lg:col-span-2 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4 text-text-secondary text-base sm:text-lg leading-relaxed text-left font-normal"
+          >
+            <p>
+              I&apos;m <strong className="text-primary font-bold">Yashwanth</strong>, a Computer Science student with a strong passion for software engineering, problem solving, and building scalable applications. I enjoy working across both frontend and backend technologies, with experience in Python, JavaScript, and TypeScript. Recently, I developed a real-time chat application using React, TypeScript, and Firebase, focusing on real-time communication, responsive UI, and scalable architecture.
+            </p>
+            <p>
+              I actively strengthen my problem-solving skills through Data Structures and Algorithms practice on platforms like LeetCode and CodeChef. I&apos;m continuously exploring modern web technologies, improving my development workflow, and learning how to design efficient, user-focused software solutions. My goal is to grow into a versatile software engineer who can contribute to impactful and innovative products.
+            </p>
+          </motion.div>
+
+          {/* Key Pillars */}
+          <div className="grid gap-4 sm:grid-cols-3">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="border border-border bg-white p-4.5 rounded-xl flex flex-col gap-2 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-primary/20 hover:shadow-sm transition-all duration-200"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                <FiCode className="text-lg" />
+              </div>
+              <h5 className="text-sm font-bold text-primary">Software Development</h5>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                Crafting robust full-stack applications and responsive web experiences.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="border border-border bg-white p-4.5 rounded-xl flex flex-col gap-2 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-primary/20 hover:shadow-sm transition-all duration-200"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
+                <FiCpu className="text-lg" />
+              </div>
+              <h5 className="text-sm font-bold text-primary">Problem Solving</h5>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                Applying optimized algorithms and DS methodologies to code challenges.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="border border-border bg-white p-4.5 rounded-xl flex flex-col gap-2 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:border-primary/20 hover:shadow-sm transition-all duration-200"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-purple-600">
+                <FiCloud className="text-lg" />
+              </div>
+              <h5 className="text-sm font-bold text-primary">Cloud & DevOps</h5>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                Building and deploying cloud infrastructure with Terraform and AWS.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Technical Arsenal Section */}
       <div className="mb-12 text-center">
         <h3 className="mb-4 text-2xl font-bold tracking-tight text-primary sm:text-3xl">Technical Arsenal</h3>
         <p className="mx-auto max-w-2xl text-text-secondary">
@@ -115,7 +196,7 @@ const About: React.FC = () => (
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-10 mx-auto max-w-5xl rounded-2xl bg-surface-alt/50 border border-border p-6 text-center shadow-sm"
+        className="mb-10 mx-auto max-w-5xl rounded-2xl bg-white border border-border p-6 text-center shadow-xs"
       >
         <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-primary/70">Core Stack</h4>
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-semibold sm:text-base">
@@ -129,7 +210,7 @@ const About: React.FC = () => (
           <span className="text-border/80">•</span>
           <span className="flex items-center gap-2 text-text-primary"><SiDocker className="text-[#2496ED] text-xl" /> Docker</span>
           <span className="text-border/80">•</span>
-          <span className="flex items-center gap-2 text-text-primary"><FaAws className="text-[#232F3E] text-xl dark:text-white" /> AWS</span>
+          <span className="flex items-center gap-2 text-text-primary"><FaAws className="text-[#232F3E] text-xl" /> AWS</span>
         </div>
       </motion.div>
 
@@ -144,16 +225,16 @@ const About: React.FC = () => (
             transition={{ delay: index * 0.05 }}
           >
             <GlassCard className="!p-8 h-full">
-              <h4 className="mb-8 text-center text-base font-bold uppercase tracking-widest text-primary">
+              <h4 className="mb-8 text-center text-sm font-bold uppercase tracking-widest text-primary">
                 {cat.title}
               </h4>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-3">
                 {cat.skills.map((skill) => (
                   <div
                     key={skill.name}
-                    className="group flex cursor-default items-center gap-2.5 rounded-lg border border-border/60 bg-white/60 px-4 py-2.5 text-sm font-medium text-text-secondary transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white hover:text-primary hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                    className="group flex cursor-default items-center gap-2 rounded-lg border border-border/60 bg-white/60 px-3 py-2 text-xs font-medium text-text-secondary transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:bg-white hover:text-primary hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
                   >
-                    <span className="text-lg opacity-80 transition-transform group-hover:scale-110 group-hover:opacity-100">
+                    <span className="text-base opacity-80 transition-transform group-hover:scale-110 group-hover:opacity-100">
                       {skill.icon}
                     </span>
                     {skill.name}

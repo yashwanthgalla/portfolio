@@ -8,6 +8,7 @@ import {
   CodingProfiles,
   Contact,
   Hackathons,
+  Contributions,
 } from "./components/sections";
 import { ScrollReveal } from "./components/ui";
 
@@ -28,6 +29,7 @@ function App() {
         <Certifications />
         <Hackathons />
         <CodingProfiles />
+        <Contributions />
         <Contact />
       </main>
       <Footer />

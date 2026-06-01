@@ -25,7 +25,7 @@ const certifications = [
     title: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
     date: "May 2026",
-    credlyUrl: "https://www.credly.com/badges/885d7db1-99ce-41d9-be4a-dc84cbcd14ea/public_url",
+    credlyUrl: "https://www.credly.com/badges/a4c42945-f015-4412-b129-71eced65426c/public_url",
     badgeImage: "https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png",
     documents: [
       {
@@ -51,103 +51,174 @@ const certifications = [
       },
     ],
   },
+  {
+    title: "Build Infrastructure with Terraform on Google Cloud",
+    issuer: "Google Cloud",
+    date: "September 2025",
+    credlyUrl: "https://www.credly.com/badges/b0afcc5a-f76c-4a12-8b89-05dd5df1dff6/public_url",
+    badgeImage: "https://images.credly.com/size/340x340/images/b18154fb-9bd3-47e5-a6f1-554be512947d/image.png",
+    documents: [],
+  },
+  {
+    title: "Python Essentials 1",
+    issuer: "Cisco Networking Academy",
+    date: "May 2026",
+    credlyUrl: "https://www.credly.com/badges/5f5edf30-0194-407d-9d82-58dff7e41b73/public_url",
+    badgeImage: "https://images.credly.com/size/340x340/images/68c0b94d-f6ac-40b1-a0e0-921439eb092e/image.png",
+    documents: [],
+  },
+  {
+    title: "AWS Academy Graduate - Cloud Foundations",
+    issuer: "Amazon Web Services Academy",
+    date: "January 2026",
+    credlyUrl: "https://www.credly.com/badges/2ca9edb4-712c-45ca-b581-91d1fad717b5/public_url",
+    badgeImage: "https://images.credly.com/images/e3541a0c-dd4a-4820-8052-5001006efc85/blob",
+    documents: [],
+  },
 ];
 
 const Certifications: React.FC = () => {
   const [viewingDoc, setViewingDoc] = useState<{ label: string; file: string } | null>(null);
+  const [activeTab, setActiveTab] = useState<"curated" | "embed">("curated");
 
   return (
-    <section id="certifications" className="bg-white py-24">
+    <section id="certifications" className="bg-white py-24 border-t border-border/40">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           title="Certifications"
           subtitle="Industry-recognized credentials and achievements."
         />
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {certifications.map((cert, i) => (
-            <motion.div
-              key={cert.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="group rounded-xl border border-border bg-white p-6 transition-all duration-200 hover:border-primary/20 hover:shadow-sm"
+        {/* Tab Switcher */}
+        <div className="flex justify-center mb-12">
+          <div className="flex items-center gap-1 rounded-lg border border-border bg-surface-alt p-1 text-xs font-semibold">
+            <button
+              onClick={() => setActiveTab("curated")}
+              className={`rounded px-4 py-2 transition-all cursor-pointer ${
+                activeTab === "curated"
+                  ? "bg-primary text-white shadow-2xs"
+                  : "text-text-secondary hover:bg-white hover:text-primary"
+              }`}
             >
-              <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
-                {/* Badge */}
-                {cert.credlyUrl ? (
-                  <a
-                    href={cert.credlyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 transition-transform hover:scale-105"
-                  >
-                    {cert.badgeImage ? (
-                      <img
-                        src={cert.badgeImage}
-                        alt={`${cert.title} Badge`}
-                        className="h-28 w-28 object-contain drop-shadow-md"
-                      />
-                    ) : (
-                      <div className="flex h-28 w-28 items-center justify-center rounded-xl bg-black/5 drop-shadow-md">
-                        <HiAcademicCap className="text-4xl text-text-muted" />
-                      </div>
-                    )}
-                  </a>
-                ) : (
-                  <div className="shrink-0 transition-transform hover:scale-105">
-                    {cert.badgeImage ? (
-                      <img
-                        src={cert.badgeImage}
-                        alt={`${cert.title} Badge`}
-                        className="h-28 w-28 object-contain drop-shadow-md"
-                      />
-                    ) : (
-                      <div className="flex h-28 w-28 items-center justify-center rounded-xl bg-black/5 drop-shadow-md">
-                        <HiAcademicCap className="text-4xl text-text-muted" />
-                      </div>
-                    )}
-                  </div>
-                )}
+              Curated Credentials
+            </button>
+            <button
+              onClick={() => setActiveTab("embed")}
+              className={`rounded px-4 py-2 transition-all cursor-pointer ${
+                activeTab === "embed"
+                  ? "bg-primary text-white shadow-2xs"
+                  : "text-text-secondary hover:bg-white hover:text-primary"
+              }`}
+            >
+              Interactive Credly Board
+            </button>
+          </div>
+        </div>
 
-                {/* Details */}
-                <div className="flex-1 text-center sm:text-left">
-                  <div className="mb-1 flex items-center justify-center gap-2 sm:justify-start">
-                    <HiAcademicCap className="text-lg text-accent" />
-                    <h3 className="text-lg font-semibold text-primary">{cert.title}</h3>
-                  </div>
-                  <p className="mb-1 text-sm text-text-secondary">{cert.issuer}</p>
-                  <p className="mb-4 text-xs text-text-muted">{cert.date}</p>
-
-                  {/* Action buttons */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-                    {cert.documents.map((doc) => (
-                      <button
-                        key={doc.label}
-                        onClick={() => setViewingDoc(doc)}
-                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-black/10 bg-white/60 px-3.5 py-2 text-xs font-medium text-black backdrop-blur-sm transition-all hover:bg-white/80 hover:shadow-sm"
-                      >
-                        {doc.label}
-                      </button>
-                    ))}
-                    {cert.credlyUrl && (
+        {/* Content Tabs */}
+        {activeTab === "curated" ? (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {certifications.map((cert, i) => (
+              <motion.div
+                key={cert.title}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+                className="group flex flex-col justify-between rounded-xl border border-border bg-white p-5 transition-all duration-200 hover:border-primary/20 hover:shadow-xs"
+              >
+                <div>
+                  {/* Badge Row */}
+                  <div className="flex justify-center mb-5">
+                    {cert.credlyUrl ? (
                       <a
                         href={cert.credlyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-black/10 bg-white/60 px-3.5 py-2 text-xs font-medium text-black backdrop-blur-sm transition-all hover:bg-white/80 hover:shadow-sm"
+                        className="shrink-0 transition-transform hover:scale-105"
                       >
-                        <HiExternalLink className="text-sm" />
-                        {cert.credlyUrl.includes("credly.com") ? "View on Credly" : "Verify Certification"}
+                        {cert.badgeImage ? (
+                          <img
+                            src={cert.badgeImage}
+                            alt={`${cert.title} Badge`}
+                            className="h-24 w-24 object-contain drop-shadow-xs"
+                          />
+                        ) : (
+                          <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-black/5 drop-shadow-xs">
+                            <HiAcademicCap className="text-3xl text-text-muted" />
+                          </div>
+                        )}
                       </a>
+                    ) : (
+                      <div className="shrink-0 transition-transform hover:scale-105">
+                        {cert.badgeImage ? (
+                          <img
+                            src={cert.badgeImage}
+                            alt={`${cert.title} Badge`}
+                            className="h-24 w-24 object-contain drop-shadow-xs"
+                          />
+                        ) : (
+                          <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-black/5 drop-shadow-xs">
+                            <HiAcademicCap className="text-3xl text-text-muted" />
+                          </div>
+                        )}
+                      </div>
                     )}
                   </div>
+
+                  {/* Details */}
+                  <div className="text-center mb-6">
+                    <h3 className="text-base font-bold text-primary mb-1 line-clamp-2 min-h-[3rem]">
+                      {cert.title}
+                    </h3>
+                    <p className="text-xs text-text-secondary font-semibold mb-0.5">{cert.issuer}</p>
+                    <p className="text-[10px] text-text-muted">{cert.date}</p>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
+                {/* Actions */}
+                <div className="flex flex-wrap items-center justify-center gap-1.5 pt-4 border-t border-border/40 mt-auto">
+                  {cert.documents.map((doc) => (
+                    <button
+                      key={doc.label}
+                      onClick={() => setViewingDoc(doc)}
+                      className="inline-flex cursor-pointer items-center gap-1 rounded-md border border-border bg-white px-2.5 py-1.5 text-[11px] font-semibold text-text-secondary transition-all hover:bg-surface-alt hover:text-primary"
+                    >
+                      {doc.label}
+                    </button>
+                  ))}
+                  {cert.credlyUrl && (
+                    <a
+                      href={cert.credlyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 rounded-md border border-border bg-white px-2.5 py-1.5 text-[11px] font-semibold text-text-secondary transition-all hover:bg-surface-alt hover:text-primary cursor-pointer"
+                    >
+                      <HiExternalLink className="text-xs" />
+                      {cert.credlyUrl.includes("credly.com") ? "Credly" : "Verify"}
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="w-full max-w-5xl mx-auto rounded-2xl border border-border overflow-hidden bg-white shadow-xs"
+          >
+            <iframe
+              src="https://www.credly.com/users/naga-yashwanth-galla"
+              width="100%"
+              height="800"
+              title="Credly Verified Credentials Board"
+              style={{ border: "none" }}
+              className="w-full"
+            />
+          </motion.div>
+        )}
       </div>
 
       {/* Full-screen PDF Viewer Modal */}
