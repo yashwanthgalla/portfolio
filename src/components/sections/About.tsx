@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { SectionHeading, GlassCard } from "../ui";
-import { 
+import {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiHtml5, SiCss3,
   SiNodedotjs, SiExpress, SiJsonwebtokens,
   SiMongodb, SiPostgresql, SiFirebase, SiSupabase,
@@ -111,7 +111,7 @@ const About: React.FC = () => (
       </div>
 
       {/* Core Stack */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

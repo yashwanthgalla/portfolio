@@ -24,8 +24,8 @@ const Navbar: React.FC = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.4 }}
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled
-          ? "border-b border-border bg-white/90 backdrop-blur-md"
-          : "bg-transparent"
+        ? "border-b border-border bg-white/90 backdrop-blur-md"
+        : "bg-transparent"
         }`}
     >
       <nav className="flex w-full items-center justify-between px-6 py-4">

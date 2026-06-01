@@ -27,13 +27,13 @@ const Contact: React.FC = () => {
       setName("");
       setEmail("");
       setMessage("");
-      
+
       const timer = setTimeout(() => {
         if (typeof reset === 'function') {
           reset();
         }
       }, 5000);
-      
+
       return () => clearTimeout(timer);
     }
   }, [state.succeeded, reset]);

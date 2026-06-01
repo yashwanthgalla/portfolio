@@ -84,23 +84,23 @@ const Designs: React.FC = () => {
                       transition={{ duration: 0.3 }}
                       className="flex flex-col items-center"
                     >
-                    <div onClick={() => setSelected(item)} className="cursor-pointer">
-                      <TiltedCard
-                        imageSrc={item.image}
-                        altText={item.title}
-                        captionText={item.title}
-                        containerHeight="320px"
-                        containerWidth="100%"
-                        imageHeight="280px"
-                        imageWidth="280px"
-                        rotateAmplitude={12}
-                        scaleOnHover={1.05}
-                        showTooltip={true}
-                        showMobileWarning={false}
-                      />
-                    </div>
-                    <p className="mt-2 text-sm font-medium text-primary">{item.title}</p>
-                    <p className="text-xs text-text-muted capitalize">{item.category}</p>
+                      <div onClick={() => setSelected(item)} className="cursor-pointer">
+                        <TiltedCard
+                          imageSrc={item.image}
+                          altText={item.title}
+                          captionText={item.title}
+                          containerHeight="320px"
+                          containerWidth="100%"
+                          imageHeight="280px"
+                          imageWidth="280px"
+                          rotateAmplitude={12}
+                          scaleOnHover={1.05}
+                          showTooltip={true}
+                          showMobileWarning={false}
+                        />
+                      </div>
+                      <p className="mt-2 text-sm font-medium text-primary">{item.title}</p>
+                      <p className="text-xs text-text-muted capitalize">{item.category}</p>
                     </motion.div>
                   </ScrollReveal>
                 ))}

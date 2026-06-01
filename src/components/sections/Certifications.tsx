@@ -5,6 +5,23 @@ import { SectionHeading } from "../ui";
 
 const certifications = [
   {
+    title: "AWS Certified Developer - Associate",
+    issuer: "Amazon Web Services",
+    date: "May 2026",
+    credlyUrl: "https://www.credly.com/badges/b84cf180-17ff-40d2-af8e-28034a618e27/public_url",
+    badgeImage: "https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png",
+    documents: [
+      {
+        label: "Certificate",
+        file: "/AWS Certified Developer - Associate certificate.pdf",
+      },
+      {
+        label: "Grade Sheet",
+        file: "/AWS Certified Developer - Associate.pdf",
+      },
+    ],
+  },
+  {
     title: "AWS Certified Cloud Practitioner",
     issuer: "Amazon Web Services",
     date: "May 2026",
@@ -25,7 +42,7 @@ const certifications = [
     title: "Oracle Certified Professional",
     issuer: "Oracle",
     date: "May 2026",
-    credlyUrl: "https://www.credly.com/users/naga-yashwanth-galla",
+    credlyUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=67764CC0D385608AF4F11C1BD9AFC888F68D35382197D4571D9467F1858A9395",
     badgeImage: "/oraclebadge.jpg",
     documents: [
       {
@@ -122,7 +139,7 @@ const Certifications: React.FC = () => {
                         className="inline-flex items-center gap-1.5 rounded-lg border border-black/10 bg-white/60 px-3.5 py-2 text-xs font-medium text-black backdrop-blur-sm transition-all hover:bg-white/80 hover:shadow-sm"
                       >
                         <HiExternalLink className="text-sm" />
-                        View on Credly
+                        {cert.credlyUrl.includes("credly.com") ? "View on Credly" : "Verify Certification"}
                       </a>
                     )}
                   </div>
