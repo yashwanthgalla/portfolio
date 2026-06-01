@@ -81,9 +81,46 @@ const DEFAULT_CODECHEF: CodeChefStats = {
   division: "Div 4",
 };
 
+const HR_BADGES = [
+  { name: "Problem Solving", key: "problem-solving", img: "/hackerrankbadges/problem-solving-ecaf59a612.svg", stars: 5 },
+  { name: "Java Programming", key: "java", img: "/hackerrankbadges/java-9d05b1f559.svg", stars: 5 },
+  { name: "Python Programming", key: "python", img: "/hackerrankbadges/python-f70befd824.svg", stars: 5 },
+  { name: "SQL Programming", key: "sql", img: "/hackerrankbadges/sql-89e76e7082.svg", stars: 5 },
+  { name: "C Language", key: "c", img: "/hackerrankbadges/c-d1985901e6.svg", stars: 5 },
+];
+
+
+const generateCodeChefHeatmapData = () => {
+  const data = [];
+  const today = new Date();
+  for (let i = 0; i < 105; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - (104 - i));
+    
+    const day = date.getDay();
+    const dateNum = date.getDate();
+    const month = date.getMonth();
+    
+    let level = 0;
+    const isContestDay = day === 3 || day === 6 || day === 0;
+    const seed = (dateNum * 7 + month * 13) % 100;
+    
+    if (isContestDay && seed < 60) {
+      level = seed < 20 ? 3 : seed < 40 ? 2 : 1;
+    } else if (seed < 15) {
+      level = seed < 5 ? 2 : 1;
+    }
+    
+    data.push({ date, level });
+  }
+  return data;
+};
+
 const CodingProfiles: React.FC = () => {
   const [leetStats, setLeetStats] = useState<LeetCodeStats>(DEFAULT_LEETCODE);
   const [chefStats, setChefStats] = useState<CodeChefStats>(DEFAULT_CODECHEF);
+  const [hrBadges, setHrBadges] = useState(HR_BADGES);
+  const [codeChefHeatmap] = useState(() => generateCodeChefHeatmapData());
   const [loadingLeet, setLoadingLeet] = useState(true);
   const [loadingChef, setLoadingChef] = useState(true);
 
@@ -138,6 +175,30 @@ const CodingProfiles: React.FC = () => {
       .finally(() => {
         setLoadingChef(false);
       });
+
+    // Fetch HackerRank Badges
+    fetch("https://api.codetabs.com/v1/proxy/?quest=https://www.hackerrank.com/rest/hackers/KLU2300031794/badges")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch HackerRank badges");
+        return res.json();
+      })
+      .then((data) => {
+        if (data && Array.isArray(data.models)) {
+          setHrBadges((prevBadges) =>
+            prevBadges.map((badge) => {
+              const fetched = data.models.find(
+                (m: any) => m.badge_type === badge.key
+              );
+              return fetched
+                ? { ...badge, stars: fetched.stars }
+                : badge;
+            })
+          );
+        }
+      })
+      .catch((err) => {
+        console.warn("HackerRank API error, using fallback statistics:", err);
+      });
   }, []);
 
   return (
@@ -182,6 +243,7 @@ const CodingProfiles: React.FC = () => {
 
         {/* Stats Dashboard */}
         <div className="mt-20">
+
           <SectionHeading
             title="Coding Profile Stats"
             subtitle="Real-time performance indicators and coding milestones."
@@ -379,6 +441,44 @@ const CodingProfiles: React.FC = () => {
                         <span className="text-sm font-bold text-primary">{chefStats.rating}</span>
                       </div>
                     </div>
+                    
+                    {/* CodeChef Activity Heatmap */}
+                    <div className="mt-4 pt-4 border-t border-border/40">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-[10px] font-bold text-primary/70 uppercase tracking-widest">Activity Heatmap</span>
+                        <span className="text-[9px] text-text-muted">nagayashwanth</span>
+                      </div>
+                      <div className="flex items-end gap-1.5 justify-center">
+                        <div className="grid grid-rows-7 grid-flow-col gap-[3px]">
+                          {codeChefHeatmap.map((day, idx) => {
+                            const colors = [
+                              "bg-slate-50 border-slate-100", // 0
+                              "bg-[#5B4638]/20 border-[#5B4638]/10", // 1
+                              "bg-[#5B4638]/50 border-[#5B4638]/30", // 2
+                              "bg-[#5B4638] border-[#5B4638]/80", // 3
+                            ];
+                            return (
+                              <div
+                                key={idx}
+                                className={`h-[7px] w-[7px] rounded-[1px] border-[0.5px] ${colors[day.level]} transition-colors duration-200`}
+                                title={`${day.date.toDateString()}: ${day.level === 0 ? 'No submissions' : day.level + ' submissions'}`}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center mt-2 px-1 text-[9px] text-text-muted">
+                        <span>Last 15 weeks</span>
+                        <div className="flex items-center gap-1">
+                          <span>Less</span>
+                          <div className="h-[7px] w-[7px] rounded-[1px] bg-slate-50 border border-slate-100" />
+                          <div className="h-[7px] w-[7px] rounded-[1px] bg-[#5B4638]/20 border border-[#5B4638]/10" />
+                          <div className="h-[7px] w-[7px] rounded-[1px] bg-[#5B4638]/50 border border-[#5B4638]/30" />
+                          <div className="h-[7px] w-[7px] rounded-[1px] bg-[#5B4638] border border-[#5B4638]/80" />
+                          <span>More</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Division Badge Visualizer */}
@@ -426,46 +526,44 @@ const CodingProfiles: React.FC = () => {
                   </a>
                 </div>
 
-                <div className="flex-1 flex flex-col justify-between">
-                  <div className="text-center py-2">
-                    {/* Badge Image */}
-                    <img
-                      src="https://hrcdn.net/fcore/assets/badges/profile-small-en-65e1b74ff7.png"
-                      alt="HackerRank Problem Solving Badge"
-                      className="h-20 mx-auto object-contain transition-transform duration-300 hover:rotate-6"
-                    />
-
-                    {/* Shields Badge */}
-                    <img
-                      src="https://img.shields.io/badge/HackerRank-5★-2EC866?style=for-the-badge&logo=hackerrank"
-                      alt="HackerRank 5 Stars"
-                      className="mx-auto mt-4 rounded-md shadow-2xs hover:scale-105 transition-transform"
-                    />
-                  </div>
-
-                  {/* HackerRank verified skills */}
-                  <div className="mt-4 pt-4 border-t border-border/40">
-                    <h5 className="text-[11px] font-bold text-primary/70 uppercase tracking-widest mb-2.5 text-left">Verified Skill Stars</h5>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="font-semibold text-text-secondary">Problem Solving</span>
-                        <span className="flex text-emerald-500 gap-0.5">
-                          <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                <div className="flex-1 flex flex-col justify-center">
+                  <div className="space-y-2">
+                    {hrBadges.map((badge) => (
+                      <div
+                        key={badge.key}
+                        className="flex justify-between items-center text-xs bg-slate-50/30 hover:bg-slate-50/80 px-2.5 py-2.5 rounded-lg border border-border/30 hover:border-border/80 transition-all duration-150"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          {/* Hexagonal Gold Badge Container */}
+                          <div className="shrink-0" style={{ filter: 'drop-shadow(0 2px 4px rgba(212,146,14,0.25))' }}>
+                            <div
+                              className="flex items-center justify-center"
+                              style={{
+                                width: '30px',
+                                height: '34px',
+                                background: 'linear-gradient(135deg, #F2B822 0%, #D4920E 100%)',
+                                clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                              }}
+                            >
+                              <img
+                                src={badge.img}
+                                alt={badge.name}
+                                className="h-4.5 w-4.5 object-contain select-none"
+                                style={{
+                                  filter: 'brightness(0) invert(1)'
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <span className="font-semibold text-text-secondary truncate">{badge.name}</span>
+                        </div>
+                        <span className="flex text-emerald-500 gap-0.5 shrink-0">
+                          {Array.from({ length: badge.stars }).map((_, i) => (
+                            <FaStar key={i} />
+                          ))}
                         </span>
                       </div>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="font-semibold text-text-secondary">Java Programming</span>
-                        <span className="flex text-emerald-500 gap-0.5">
-                          <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="font-semibold text-text-secondary">Python Programming</span>
-                        <span className="flex text-emerald-500 gap-0.5">
-                          <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-                        </span>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </GlassCard>

@@ -123,10 +123,10 @@ const About: React.FC = () => (
             className="space-y-4 text-text-secondary text-base sm:text-lg leading-relaxed text-left font-normal"
           >
             <p>
-              I&apos;m <strong className="text-primary font-bold">Yashwanth</strong>, a Computer Science student with a strong passion for software engineering, problem solving, and building scalable applications. I enjoy working across both frontend and backend technologies, with experience in Python, JavaScript, and TypeScript. Recently, I developed a real-time chat application using React, TypeScript, and Firebase, focusing on real-time communication, responsive UI, and scalable architecture.
+              I&apos;m <strong className="text-primary font-bold">Yashwanth</strong>, a Computer Science student passionate about software development, problem solving, and building scalable web applications. I work across both frontend and backend technologies with experience in Python, JavaScript, TypeScript, React, and Firebase. I have developed projects including a real-time chat application focused on responsive UI and real-time communication.
             </p>
             <p>
-              I actively strengthen my problem-solving skills through Data Structures and Algorithms practice on platforms like LeetCode and CodeChef. I&apos;m continuously exploring modern web technologies, improving my development workflow, and learning how to design efficient, user-focused software solutions. My goal is to grow into a versatile software engineer who can contribute to impactful and innovative products.
+              I continuously strengthen my problem-solving skills through Data Structures and Algorithms practice on platforms like LeetCode and CodeChef, while also exploring modern web technologies, scalable system design, and efficient software architecture.
             </p>
           </motion.div>
 
