@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { GitHubCalendar } from "react-github-calendar";
+import { ActivityCalendar } from "react-activity-calendar";
 import { GlassCard, SectionHeading } from "../ui";
 import { FiGithub, FiBookOpen, FiUsers, FiExternalLink } from "react-icons/fi";
+
 
 interface GitHubStats {
   public_repos: number;
@@ -43,8 +44,12 @@ const Contributions: React.FC = () => {
   const [selectedTheme, setSelectedTheme] = useState<ThemeName>("ocean");
   const [stats, setStats] = useState<GitHubStats>(DEFAULT_STATS);
   const [loading, setLoading] = useState(true);
+  const [contributionData, setContributionData] = useState<any[]>([]);
+  const [loadingCalendar, setLoadingCalendar] = useState(true);
+  const [calendarError, setCalendarError] = useState<string | null>(null);
 
   useEffect(() => {
+    // 1. Fetch user stats
     fetch("https://api.github.com/users/yashwanthgalla")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
@@ -66,6 +71,65 @@ const Contributions: React.FC = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    // 2. Fetch contribution calendar data with failover/proxy
+    const fetchContributions = async () => {
+      setLoadingCalendar(true);
+      setCalendarError(null);
+      const urls = [
+        "https://github-contributions-api.jogruber.de/v4/yashwanthgalla?y=last",
+        "https://api.codetabs.com/v1/proxy/?quest=https://github-contributions-api.jogruber.de/v4/yashwanthgalla?y=last",
+        "https://github-contributions-api.deno.dev/yashwanthgalla.json"
+      ];
+
+      for (let i = 0; i < urls.length; i++) {
+        try {
+          const res = await fetch(urls[i]);
+          if (!res.ok) throw new Error(`HTTP status ${res.status}`);
+          const data = await res.json();
+          
+          if (data && Array.isArray(data.contributions)) {
+            let parsedContributions: any[] = [];
+            
+            if (Array.isArray(data.contributions[0])) {
+              // Deno API format: contributions is an array of weeks (which are arrays of days)
+              parsedContributions = data.contributions.flat().map((day: any) => ({
+                date: day.date,
+                count: day.contributionCount ?? day.count ?? 0,
+                level: day.contributionLevel === "NONE" ? 0 
+                     : day.contributionLevel === "FIRST_QUARTILE" ? 1 
+                     : day.contributionLevel === "SECOND_QUARTILE" ? 2 
+                     : day.contributionLevel === "THIRD_QUARTILE" ? 3 
+                     : day.contributionLevel === "FOURTH_QUARTILE" ? 4 
+                     : (day.level ?? 0)
+              }));
+            } else {
+              // Standard format
+              parsedContributions = data.contributions.map((day: any) => ({
+                date: day.date,
+                count: day.count ?? 0,
+                level: day.level ?? 0
+              }));
+            }
+
+            // Sort chronologically (ascending date) to ensure react-activity-calendar renders grid columns correctly
+            const sortedContributions = parsedContributions.sort(
+              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+            );
+
+            setContributionData(sortedContributions);
+            setLoadingCalendar(false);
+            return; // Success! Exit loop
+          }
+        } catch (err) {
+          console.warn(`Failed to fetch from ${urls[i]}:`, err);
+        }
+      }
+      setCalendarError("Failed to fetch contribution data. Please try again later.");
+      setLoadingCalendar(false);
+    };
+
+    fetchContributions();
   }, []);
 
   return (
@@ -225,15 +289,26 @@ const Contributions: React.FC = () => {
 
             {/* Calendar SVG Wrap */}
             <div className="w-full overflow-x-auto pb-2 scrollbar-thin">
-              <div className="min-w-[800px] p-1">
-                <GitHubCalendar
-                  username="yashwanthgalla"
-                  theme={THEMES[selectedTheme]}
-                  blockSize={11}
-                  blockMargin={4}
-                  blockRadius={2}
-                  fontSize={12}
-                />
+              <div className="min-w-[800px] p-1 flex justify-center items-center min-h-[140px]">
+                {loadingCalendar ? (
+                  <div className="flex flex-col items-center justify-center gap-2 py-8 w-full">
+                    <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                    <span className="text-xs text-text-secondary font-medium">Loading contribution graph...</span>
+                  </div>
+                ) : calendarError ? (
+                  <div className="flex items-center justify-center text-xs text-rose-500 font-semibold bg-rose-50/50 border border-rose-100 rounded-xl py-6 px-4 w-full">
+                    {calendarError}
+                  </div>
+                ) : (
+                  <ActivityCalendar
+                    data={contributionData}
+                    theme={THEMES[selectedTheme]}
+                    blockSize={11}
+                    blockMargin={4}
+                    blockRadius={2}
+                    fontSize={12}
+                  />
+                )}
               </div>
             </div>
           </GlassCard>
