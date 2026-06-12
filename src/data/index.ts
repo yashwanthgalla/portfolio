@@ -187,6 +187,20 @@ export const designItems: DesignItem[] = [
     category: "poster",
     image: "posters/shreyas.png",
     description: "A new poster featuring Shreyas with a bold, high-contrast composition.",
+  },
+  {
+    id: 16,
+    title: "Rohit Sharma",
+    category: "poster",
+    image: "posters/rohitsharma.jpg",
+    description: "A customized sports poster celebrating the legendary Rohit Sharma in his signature stance.",
+  },
+  {
+    id: 17,
+    title: "Kimi Antonelli",
+    category: "poster",
+    image: "posters/andreakimi.jpg",
+    description: "A high-octane F1 tribute poster to Andrea Kimi Antonelli, the rising star of Formula 1.",
   }
 ];
 
