@@ -56,7 +56,7 @@ const certifications = [
     issuer: "Oracle",
     date: "May 2026",
     credlyUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=67764CC0D385608AF4F11C1BD9AFC888F68D35382197D4571D9467F1858A9395",
-    badgeImage: "/oraclebadge.jpg",
+    badgeImage: "/oraclebadge.png",
     documents: [
       {
         label: "Certificate",
@@ -80,8 +80,8 @@ const Certifications: React.FC = () => {
         <div className="grid gap-6 md:grid-cols-2 mt-12">
           {certifications.map((cert, i) => (
             <ScrollReveal key={cert.title} delay={i * 0.1}>
-              <GlassCard className="flex flex-col h-full !p-6" hover={true}>
-                <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start h-full">
+              <GlassCard className="flex flex-col justify-center h-full !p-6" hover={true}>
+                <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
                   {/* Badge Image container - transparent, large and clear */}
                   <div className="shrink-0 transition-transform duration-300 hover:scale-105">
                     <div className="flex h-24 w-24 items-center justify-center">
@@ -98,7 +98,7 @@ const Certifications: React.FC = () => {
                   </div>
 
                   {/* Details and text hierarchy - matching Hackathons details styling */}
-                  <div className="flex-1 text-center sm:text-left flex flex-col h-full">
+                  <div className="flex-1 text-center sm:text-left">
                     <h3 className="text-lg font-semibold text-primary mb-1 leading-snug">
                       {cert.title}
                     </h3>
@@ -110,7 +110,7 @@ const Certifications: React.FC = () => {
                     </p>
 
                     {/* Actions container - matching Hackathons button design */}
-                    <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start mt-auto">
+                    <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
                       {cert.documents.map((doc) => (
                         <button
                           key={doc.label}
