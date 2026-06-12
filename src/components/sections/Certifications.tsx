@@ -54,7 +54,7 @@ const certifications = [
   {
     title: "Oracle Certified Professional",
     issuer: "Oracle",
-    date: "May 2026",
+    date: "October 2025",
     credlyUrl: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=67764CC0D385608AF4F11C1BD9AFC888F68D35382197D4571D9467F1858A9395",
     badgeImage: "/oraclebadge.png",
     documents: [
