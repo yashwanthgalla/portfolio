@@ -20,11 +20,10 @@ const ScrollToTop: React.FC = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.3 }}
           onClick={scrollUp}
           aria-label="Scroll to top"
-          className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-white text-text-secondary shadow-sm transition-colors hover:border-primary hover:text-primary"
+          className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[#E6E2DA] bg-white text-[#2D3A31] hover:bg-[#2D3A31] hover:text-white transition-colors duration-300 shadow-sm cursor-pointer"
         >
           <HiArrowUp className="text-base" />
         </motion.button>

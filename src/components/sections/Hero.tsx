@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { HiArrowDown, HiDocumentDownload } from "react-icons/hi";
-import { BlurText } from "../ui";
-// @ts-expect-error - DotField is JSX
-import DotField from "../../components/DotField";
+import { GLSLHills } from "../ui";
+import Button from "../ui/Button";
 
 const heroTags = [
   "Full Stack Developer",
@@ -20,83 +19,81 @@ const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center px-6 pt-20 overflow-hidden bg-linear-to-br from-white via-blue-50/40 to-indigo-50/30"
+      className="relative flex min-h-screen items-center justify-center px-6 pt-32 overflow-hidden bg-[#F9F8F4] swiss-grid-pattern"
     >
-      {/* DotField particle background */}
-      <div className="absolute inset-0 z-0">
-        <DotField
-          dotRadius={1.5}
-          dotSpacing={14}
-          bulgeStrength={67}
-          glowRadius={160}
-          sparkle={false}
-          waveAmplitude={0}
-          cursorRadius={500}
-          cursorForce={0.1}
-          bulgeOnly={true}
-          gradientFrom="#A855F7"
-          gradientTo="#B497CF"
-          glowColor="transparent"
-        />
+      {/* Soft Clay Glowing Background Shape */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[#DCCFC2]/30 blur-3xl z-0" />
+
+      {/* GLSL Hills Background */}
+      <div className="absolute inset-0 z-0 opacity-25">
+        <GLSLHills width="100%" height="100%" />
+      </div>
+
+      {/* Decorative Vertical Side Label */}
+      <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block select-none z-10">
+        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#2D3A31]/40 [writing-mode:vertical-rl] font-sans">
+          GALLA NAGA YASHWANTH • PORTFOLIO • VOL. 01
+        </span>
       </div>
 
       {/* Hero content */}
-      <div className="relative z-10 mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
-        {/* Main content card */}
+      <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-10 text-center">
+        <div className="flex flex-col items-center">
+          <span className="text-xs font-black uppercase tracking-[0.3em] text-[#8C9A84] block mb-4">
+            00. PORTFOLIO INDEX
+          </span>
+          {/* Main Headline - Playfair Display serif, capitalized, with terracotta italic emphasis */}
+          <h1 className="font-serif font-semibold text-5xl md:text-8xl tracking-tight leading-[1.05] text-[#2D3A31] max-w-3xl">
+            Galla Naga
+            <br />
+            <span className="font-serif italic font-normal text-[#C27B66]">
+              Yashwanth
+            </span>
+          </h1>
+        </div>
+
+        {/* Roles structured in pill-shaped tags */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="rounded-3xl border border-white/30 bg-white/40 px-8 py-14 shadow-sm sm:px-14 sm:py-16"
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-3.5 max-w-2xl"
         >
-
-          <BlurText
-            text="Galla Naga Yashwanth"
-            delay={150}
-            animateBy="words"
-            direction="top"
-            className="justify-center text-4xl font-bold leading-tight tracking-tight text-black md:text-5xl lg:text-6xl whitespace-nowrap"
-          />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="mt-6 flex max-w-xl flex-wrap items-center justify-center gap-2"
-          >
-            {heroTags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-black/10 bg-white/60 px-3 py-1 text-xs font-medium text-black/80 shadow-sm backdrop-blur-sm md:text-sm"
-              >
-                {tag}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.5 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-3"
-          >
-            <button
-              onClick={() => scrollTo("#projects")}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-black/10 bg-white/60 px-5 py-2.5 text-sm font-medium text-black transition-all hover:bg-white/80"
+          {heroTags.map((tag, idx) => (
+            <span
+              key={tag}
+              className="rounded-full border border-[#E6E2DA] bg-white/70 backdrop-blur-xs py-2 px-4.5 text-[10px] font-bold uppercase tracking-widest text-[#2D3A31]/80 shadow-[0_2px_6px_rgba(45,58,49,0.02)] transition-colors hover:bg-[#8C9A84]/15 hover:text-[#2D3A31]"
             >
-              <HiArrowDown className="text-sm" />
-              View Projects
-            </button>
+              {tag}
+            </span>
+          ))}
+        </motion.div>
 
-            <a
-              href="/Resume(18 May).pdf"
-              download
-              className="inline-flex items-center gap-2 rounded-lg border border-black/10 bg-white/60 px-5 py-2.5 text-sm font-medium text-black transition-all hover:bg-white/80"
-            >
-              <HiDocumentDownload className="text-sm" />
-              Resume
-            </a>
-          </motion.div>
+        {/* Call-to-actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35, duration: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
+          <Button
+            variant="primary"
+            onClick={() => scrollTo("#projects")}
+            className="flex items-center gap-2"
+          >
+            <HiArrowDown className="text-sm" />
+            <span>View Projects</span>
+          </Button>
+
+          <Button
+            variant="outline"
+            href="/Resume(18 May).pdf"
+            download
+            className="flex items-center gap-2"
+          >
+            <HiDocumentDownload className="text-sm" />
+            <span>Resume</span>
+          </Button>
         </motion.div>
       </div>
     </section>

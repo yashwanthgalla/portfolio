@@ -2,9 +2,9 @@ import { useRef, useState, type ReactNode } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const springValues = {
-  damping: 30,
-  stiffness: 100,
-  mass: 2,
+  damping: 40,
+  stiffness: 80,
+  mass: 1.5,
 };
 
 interface TiltedCardProps {
@@ -25,15 +25,14 @@ interface TiltedCardProps {
 
 export default function TiltedCard({
   imageSrc,
-  altText = "Tilted card image",
+  altText = "Organic image card",
   captionText = "",
   containerHeight = "300px",
   containerWidth = "100%",
   imageHeight = "300px",
   imageWidth = "300px",
-  scaleOnHover = 1.1,
-  rotateAmplitude = 14,
-  showMobileWarning = true,
+  scaleOnHover = 1.05,
+  rotateAmplitude = 8,
   showTooltip = true,
   overlayContent = null,
   displayOverlayContent = false,
@@ -47,8 +46,8 @@ export default function TiltedCard({
   const scale = useSpring(1, springValues);
   const opacity = useSpring(0);
   const rotateFigcaption = useSpring(0, {
-    stiffness: 350,
-    damping: 30,
+    stiffness: 300,
+    damping: 40,
     mass: 1,
   });
 
@@ -71,7 +70,7 @@ export default function TiltedCard({
     y.set(e.clientY - rect.top);
 
     const velocityY = offsetY - lastY;
-    rotateFigcaption.set(-velocityY * 0.6);
+    rotateFigcaption.set(-velocityY * 0.5);
     setLastY(offsetY);
   }
 
@@ -91,7 +90,7 @@ export default function TiltedCard({
   return (
     <figure
       ref={ref}
-      className="relative flex flex-col items-center justify-center [perspective:800px] overflow-hidden"
+      className="relative flex flex-col items-center justify-center [perspective:1000px] overflow-hidden select-none"
       style={{
         height: containerHeight,
         width: containerWidth,
@@ -100,14 +99,8 @@ export default function TiltedCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {showMobileWarning && (
-        <div className="absolute top-2 rounded-md bg-black/60 px-3 py-1 text-xs text-white sm:hidden">
-          Best viewed on desktop
-        </div>
-      )}
-
       <motion.div
-        className="relative [transform-style:preserve-3d]"
+        className="relative [transform-style:preserve-3d] border border-[#E6E2DA] rounded-[40px] overflow-hidden bg-[#F2F0EB] group shadow-[0_10px_25px_rgba(45,58,49,0.03)]"
         style={{
           width: imageWidth,
           height: imageHeight,
@@ -119,23 +112,19 @@ export default function TiltedCard({
         <motion.img
           src={imageSrc}
           alt={altText}
-          className="absolute top-0 left-0 rounded-2xl object-contain"
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-          }}
+          className="absolute top-0 left-0 w-full h-full object-cover rounded-[40px] transition-all duration-700 ease-out"
         />
 
         {displayOverlayContent && overlayContent && (
-          <motion.div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/40 text-white">
+          <div className="absolute inset-0 flex items-center justify-center rounded-[40px] bg-[#2D3A31]/40 text-white">
             {overlayContent}
-          </motion.div>
+          </div>
         )}
       </motion.div>
 
-      {showTooltip && (
+      {showTooltip && captionText && (
         <motion.figcaption
-          className="pointer-events-none absolute top-0 left-0 rounded-md bg-white px-2.5 py-1 text-xs font-medium text-primary shadow-md"
+          className="pointer-events-none absolute top-0 left-0 rounded-full border border-[#E6E2DA] bg-white/95 backdrop-blur-xs px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#2D3A31] shadow-[0_4px_10px_rgba(45,58,49,0.05)]"
           style={{
             x,
             y,

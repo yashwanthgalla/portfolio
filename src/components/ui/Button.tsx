@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
 interface ButtonProps {
@@ -13,15 +12,15 @@ interface ButtonProps {
 }
 
 const base =
-  "inline-flex items-center gap-2 rounded-lg px-5 py-2.5 font-medium transition-all duration-200 cursor-pointer text-sm";
+  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ease-out cursor-pointer select-none border h-12";
 
 const variants: Record<string, string> = {
   primary:
-    "bg-primary text-white hover:bg-primary-light",
+    "bg-[#2D3A31] text-white border-transparent hover:bg-[#C27B66] hover:text-white shadow-[0_4px_10px_rgba(45,58,49,0.08)] hover:shadow-[0_6px_15px_rgba(194,123,102,0.15)]",
   outline:
-    "border border-border text-primary hover:border-primary hover:bg-surface-alt",
+    "bg-transparent text-[#8C9A84] border-[#8C9A84] hover:bg-[#8C9A84]/10 hover:border-[#8c9a84]",
   ghost:
-    "text-text-secondary hover:text-primary hover:bg-surface-alt",
+    "bg-transparent text-[#2D3A31] border-transparent hover:bg-[#DCCFC2]/20",
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -38,8 +37,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <motion.a
-        whileTap={{ scale: 0.97 }}
+      <a
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -47,20 +45,19 @@ const Button: React.FC<ButtonProps> = ({
         className={classes}
       >
         {children}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.button
-      whileTap={{ scale: 0.97 }}
+    <button
       type={type}
       onClick={onClick}
       disabled={disabled}
       className={classes}
     >
       {children}
-    </motion.button>
+    </button>
   );
 };
 

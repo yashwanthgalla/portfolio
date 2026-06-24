@@ -253,7 +253,7 @@ export const codingProfiles: CodingProfile[] = [
 /* ── Social Links ─────────────────────────────────────── */
 export const socialLinks: SocialLink[] = [
   { name: "GitHub", url: "https://github.com/yashwanthgalla", icon: "github" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/yashwanthgalla", icon: "linkedin" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/galla-naga-yashwanth-7776732b3/", icon: "linkedin" },
   { name: "Twitter", url: "https://x.com/yashwanth_galla", icon: "twitter" },
   { name: "Instagram", url: "https://instagram.com/_yashwanth.45", icon: "instagram" },
   { name: "Email", url: "mailto:nagayashwanthgalla@gmail.com", icon: "email" },

@@ -1,115 +1,132 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiX } from "react-icons/hi";
 import { SectionHeading, ScrollReveal } from "../ui";
-import CircularGallery from "../ui/CircularGallery";
-import TiltedCard from "../ui/TiltedCard";
 import { designItems } from "../../data";
 import type { DesignItem } from "../../types";
 
 const Designs: React.FC = () => {
   const [selected, setSelected] = useState<DesignItem | null>(null);
 
-  const posterItems = useMemo(
-    () =>
-      designItems
-        .filter((d) => d.category === "poster")
-        .map((d) => ({ image: d.image, text: d.title })),
+  useEffect(() => {
+    if (selected) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+    return () => document.body.classList.remove("modal-open");
+  }, [selected]);
+
+  const posters = useMemo(
+    () => designItems.filter((d) => d.category === "poster"),
     []
   );
 
-  const gridItems = useMemo(
-    () => designItems.filter((d) => d.category !== "poster"),
+  const modelItems = useMemo(
+    () => designItems.filter((d) => d.category === "cad"),
     []
   );
-
-  const showGallery = posterItems.length > 0;
 
   return (
-    <section id="designs" className="py-24">
+    <section id="designs" className="py-32 bg-[#F9F8F4] border-t border-[#E6E2DA] swiss-diagonal">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
-          title="Designing"
+          title="creative *designs*"
           subtitle="Creative work spanning posters, graphics, and CAD modeling."
+          number="03"
         />
       </div>
 
-      {/* Circular Gallery for Posters — full bleed edge-to-edge */}
-      {showGallery && (
-        <ScrollReveal>
-          <div className="mb-4 text-center">
-            <h3 className="text-xl font-semibold text-primary">Posters</h3>
+      {/* Posters Masonry Arch Exhibition */}
+      {posters.length > 0 && (
+        <div className="mx-auto max-w-6xl px-6 mb-24">
+          <ScrollReveal>
+            <div className="mb-12 text-center">
+              <h3 className="font-serif italic text-2xl text-[#2D3A31]">
+                poster exhibition
+              </h3>
+            </div>
+          </ScrollReveal>
+
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 [column-fill:balance] space-y-8">
+            {posters.map((item, i) => (
+              <ScrollReveal key={item.id} delay={i * 0.05}>
+                <motion.div
+                  layout
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="break-inside-avoid border border-[#E6E2DA] bg-white p-4 rounded-3xl cursor-pointer hover:-translate-y-1.5 transition-all duration-300 ease-out hover:shadow-[0_15px_30px_rgba(45,58,49,0.06)] shadow-[0_10px_20px_rgba(45,58,49,0.02)] group mb-8 flex flex-col"
+                  onClick={() => setSelected(item)}
+                >
+                  <div className="relative overflow-hidden bg-[#F2F0EB] rounded-t-full rounded-b-2xl border border-[#E6E2DA]/40 p-2.5">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full object-cover rounded-t-full rounded-b-xl transition-all duration-700 ease-out group-hover:scale-103"
+                    />
+                  </div>
+                  <div className="mt-4 flex items-baseline justify-between px-1">
+                    <h4 className="font-serif font-bold text-lg text-[#2D3A31]">
+                      {item.title}
+                    </h4>
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-[#C27B66]">
+                      Exhibition
+                    </span>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
           </div>
-        </ScrollReveal>
+        </div>
       )}
 
-      {showGallery && (
-        <ScrollReveal>
-          <div className="relative mb-16 h-125 w-full overflow-hidden">
-            <CircularGallery
-              items={posterItems}
-              bend={1}
-              textColor="#111827"
-              borderRadius={0.05}
-              font="bold 30px Inter"
-              scrollSpeed={2}
-              scrollEase={0.05}
-            />
-          </div>
-        </ScrollReveal>
-      )}
-
+      {/* CAD Models Masonry Section */}
       <div className="mx-auto max-w-6xl px-6">
-        {gridItems.length > 0 && (
-          <>
+        {modelItems.length > 0 && (
+          <div className="mb-8">
             <ScrollReveal>
-              <div className="mb-8 text-center">
-                <h3 className="text-xl font-semibold text-primary">Modelling</h3>
+              <div className="mb-12 border-t border-[#E6E2DA]/60 pt-16 text-center">
+                <h3 className="font-serif italic text-2xl text-[#2D3A31]">
+                  CAD & 3D models
+                </h3>
               </div>
             </ScrollReveal>
 
-            <motion.div
-              layout
-              className="grid gap-8 sm:grid-cols-2"
-            >
-              <AnimatePresence mode="popLayout">
-                {gridItems.map((item, i) => (
-                  <ScrollReveal key={item.id} delay={i * 0.1}>
-                    <motion.div
-                      layout
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: "-40px" }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex flex-col items-center"
-                    >
-                      <div onClick={() => setSelected(item)} className="cursor-pointer">
-                        <TiltedCard
-                          imageSrc={item.image}
-                          altText={item.title}
-                          captionText={item.title}
-                          containerHeight="320px"
-                          containerWidth="100%"
-                          imageHeight="280px"
-                          imageWidth="280px"
-                          rotateAmplitude={12}
-                          scaleOnHover={1.05}
-                          showTooltip={true}
-                          showMobileWarning={false}
-                        />
-                      </div>
-                      <p className="mt-2 text-sm font-medium text-primary">{item.title}</p>
-                      <p className="text-xs text-text-muted capitalize">{item.category}</p>
-                    </motion.div>
-                  </ScrollReveal>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          </>
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 [column-fill:balance] space-y-8">
+              {modelItems.map((item, i) => (
+                <ScrollReveal key={item.id} delay={i * 0.05}>
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="break-inside-avoid border border-[#E6E2DA] bg-white p-4 rounded-3xl cursor-pointer hover:-translate-y-1.5 transition-all duration-300 ease-out hover:shadow-[0_15px_30px_rgba(45,58,49,0.06)] shadow-[0_10px_20px_rgba(45,58,49,0.02)] group mb-8 flex flex-col"
+                    onClick={() => setSelected(item)}
+                  >
+                    <div className="relative overflow-hidden bg-[#F2F0EB] rounded-t-full rounded-b-2xl border border-[#E6E2DA]/40 p-2.5">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full object-cover rounded-t-full rounded-b-xl transition-all duration-700 ease-out group-hover:scale-103"
+                      />
+                    </div>
+                    <div className="mt-4 flex items-baseline justify-between px-1">
+                      <h4 className="font-serif font-bold text-lg text-[#2D3A31]">
+                        {item.title}
+                      </h4>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-[#8C9A84] border border-[#8C9A84]/45 bg-[#8C9A84]/5 px-2.5 py-0.5 rounded-full">
+                        {item.category}
+                      </span>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
         )}
 
-        {/* Modal */}
+        {/* Botanical Detail Modal */}
         <AnimatePresence>
           {selected && (
             <motion.div
@@ -117,39 +134,43 @@ const Designs: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelected(null)}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-[#2D3A31]/50 p-4 backdrop-blur-xs"
             >
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
+                initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
+                exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative max-h-[90vh] w-full max-w-2xl overflow-auto rounded-xl border border-border bg-white shadow-2xl"
+                className="relative max-h-[90vh] w-full max-w-2xl overflow-auto no-scrollbar rounded-[32px] border border-[#E6E2DA] bg-white shadow-[0_25px_50px_-12px_rgba(45,58,49,0.15)]"
               >
                 <button
                   onClick={() => setSelected(null)}
-                  className="absolute right-3 top-3 z-10 rounded-lg bg-white/90 p-1.5 text-lg text-text-secondary transition-colors hover:text-primary"
+                  className="absolute right-5 top-5 z-10 border border-[#E6E2DA] bg-white p-2.5 text-lg text-[#2D3A31] transition-colors hover:bg-[#C27B66] hover:text-white rounded-full cursor-pointer shadow-sm"
                   aria-label="Close modal"
                 >
                   <HiX />
                 </button>
-                <img
-                  src={selected.image}
-                  alt={selected.title}
-                  className="w-full object-contain"
-                />
-                <div className="p-5">
-                  <h3 className="text-lg font-semibold text-primary">
+                <div className="border-b border-[#E6E2DA] bg-[#F2F0EB]/40 flex items-center justify-center p-6 rounded-t-[32px]">
+                  <img
+                    src={selected.image}
+                    alt={selected.title}
+                    className="max-h-[55vh] object-contain rounded-2xl border border-[#E6E2DA]/30"
+                  />
+                </div>
+                <div className="p-8">
+                  <h3 className="font-serif font-bold text-3xl text-[#2D3A31] leading-none">
                     {selected.title}
                   </h3>
                   {selected.description && (
-                    <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+                    <p className="mt-4 text-sm font-semibold uppercase leading-relaxed text-[#2D3A31]/75">
                       {selected.description}
                     </p>
                   )}
-                  <span className="mt-3 inline-block rounded border border-border px-2.5 py-0.5 text-xs font-medium uppercase text-text-muted">
-                    {selected.category}
-                  </span>
+                  <div className="mt-6">
+                    <span className="inline-block border border-[#E6E2DA] bg-[#F2F0EB] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2D3A31] rounded-full">
+                      {selected.category}
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

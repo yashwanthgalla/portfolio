@@ -16,10 +16,12 @@ const Designs = lazy(() => import("./components/sections/Designs"));
 
 function App() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground selection:bg-terracotta selection:text-white">
+      {/* Botanical Tactile Noise Overlay */}
+      <div className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.015] swiss-noise" />
 
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <About />
         <Projects />
