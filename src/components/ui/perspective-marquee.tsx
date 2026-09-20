@@ -42,11 +42,12 @@ const FONT_FAMILY =
 
 const DEFAULT_ITEMS = [
   "React",
-  "TypeScript",
   "JavaScript",
+  "Python",
   "Tailwind",
   "Next.js",
-  "Node.js",
+  "AWS",
+  "Docker",
   "MongoDB",
   "Git",
 ];

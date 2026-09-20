@@ -5,6 +5,18 @@ import { SectionHeading, ScrollReveal } from "../ui";
 
 const certifications = [
   {
+    title: "Microsoft Certified: Azure Fundamentals",
+    issuer: "Microsoft",
+    date: "September 2026",
+    badgeImage: "/azure.svg",
+    documents: [
+      {
+        label: "Certificate",
+        file: "/AZ-900 Certification.pdf",
+      },
+    ],
+  },
+  {
     title: "Certified Advanced Automation Professional",
     issuer: "Automation Anywhere",
     date: "June 2026",

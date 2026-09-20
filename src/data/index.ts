@@ -25,7 +25,7 @@ export const projects: Project[] = [
     description:
       "A sleek music streaming platform with playlist management, audio playback controls, and a modern responsive UI.",
     image: "Projects/musicstreaming.png",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    techStack: ["React", "JavaScript", "Tailwind CSS", "Vercel"],
     liveUrl: "https://musicstreaming-beta.vercel.app/",
     repoUrl: "https://github.com/yashwanthgalla/musicstreaming",
   },
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     description:
       "A full-stack car rental application with vehicle browsing, booking management, and a clean user-friendly interface.",
     image: "Projects/carrentals.png",
-    techStack: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    techStack: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
     liveUrl: "https://carrental-lac-chi.vercel.app/",
     repoUrl: "https://github.com/yashwanthgalla/carrental-frontend",
   },
@@ -45,7 +45,7 @@ export const projects: Project[] = [
     description:
       "A retro-inspired Minesweeper game with multiple difficulty levels, timer, and AI-assisted gameplay built using Kiro.",
     image: "Projects/minesweeper.png",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Kiro AI"],
+    techStack: ["React", "JavaScript", "Tailwind CSS", "Kiro AI"],
     liveUrl: "https://minesweeper-sage-pi.vercel.app/",
     repoUrl: "https://github.com/yashwanthgalla/Minesweeper-Retro-Revival-Building-an-AI-Assisted-Game-Using-Kiro",
   },
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     description:
       "A modern developer portfolio featuring glassmorphism UI, interactive particle effects, and smooth animations.",
     image: "Projects/portfolio.png",
-    techStack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    techStack: ["React", "JavaScript", "Tailwind CSS", "Framer Motion"],
     liveUrl: "https://portfolioyash-xi.vercel.app/",
     repoUrl: "https://github.com/yashwanthgalla/portfolio",
   },
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     description:
       "A fast and easy-to-use file conversion tool supporting multiple formats including PDF, images, and documents.",
     image: "Projects/fileconverter.png",
-    techStack: ["React", "Tailwind CSS", "Node.js", "Vercel"],
+    techStack: ["React", "Tailwind CSS", "Express.js", "Vercel"],
     liveUrl: "https://dammypdf.vercel.app/",
     repoUrl: "https://github.com/yashwanthgalla/dammypdf",
   },

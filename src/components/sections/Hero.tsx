@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
 
           <Button
             variant="outline"
-            href="/Resume(18 May).pdf"
+            href="/Resume 21-09-2026.pdf"
             download
             className="flex items-center gap-2"
           >

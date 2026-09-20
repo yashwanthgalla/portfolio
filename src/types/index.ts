@@ -1,4 +1,4 @@
-/* ── Shared TypeScript interfaces ──────────────────────── */
+/* ── Shared type interfaces ──────────────────────── */
 
 export interface NavLink {
   label: string;

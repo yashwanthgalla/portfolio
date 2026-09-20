@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { SectionHeading, TiltedCard } from "../ui";
 import { FiCode, FiCpu, FiCloud, FiDatabase, FiTerminal, FiTool } from "react-icons/fi";
 import {
-  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss,
-  SiNodedotjs, SiExpress, SiJsonwebtokens,
+  SiReact, SiNextdotjs, SiJavascript, SiTailwindcss,
+  SiExpress, SiJsonwebtokens,
   SiMongodb, SiPostgresql, SiFirebase, SiSupabase,
   SiDocker, SiCloudflare,
   SiGit, SiGithub, SiPostman, SiFigma,
@@ -12,11 +12,12 @@ import {
 } from "react-icons/si";
 import { FaJava, FaAws } from "react-icons/fa";
 import { TbApi, TbBrandVscode } from "react-icons/tb";
+import { VscAzure } from "react-icons/vsc";
 
 const heroStack = [
   { name: "React", icon: <SiReact className="text-[#61DAFB]" /> },
   { name: "Next.js", icon: <SiNextdotjs className="text-[#2D3A31]" /> },
-  { name: "Node.js", icon: <SiNodedotjs className="text-[#339933]" /> },
+  { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
   { name: "PostgreSQL", icon: <SiPostgresql className="text-[#4169E1]" /> },
   { name: "Docker", icon: <SiDocker className="text-[#2496ED]" /> },
   { name: "AWS", icon: <FaAws className="text-[#232F3E]" /> },
@@ -31,7 +32,6 @@ const coreExpertise = [
     skills: [
       { name: "React", icon: <SiReact className="text-[#61DAFB]" /> },
       { name: "Next.js", icon: <SiNextdotjs className="text-[#2D3A31]" /> },
-      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
       { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#06B6D4]" /> },
       { name: "JavaScript", icon: <SiJavascript className="text-[#F7DF1E]" /> },
     ],
@@ -41,7 +41,7 @@ const coreExpertise = [
     description: "Architecting high-performance server logic, secure JWT authentication schemes, and robust RESTful API integration layers.",
     icon: <FiCpu className="text-xl" />,
     skills: [
-      { name: "Node.js", icon: <SiNodedotjs className="text-[#339933]" /> },
+      { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
       { name: "Express.js", icon: <SiExpress className="text-[#2D3A31]" /> },
       { name: "REST APIs", icon: <TbApi className="text-neutral-400" /> },
       { name: "JWT Auth", icon: <SiJsonwebtokens className="text-[#2D3A31]" /> },
@@ -64,6 +64,7 @@ const coreExpertise = [
     icon: <FiCloud className="text-xl" />,
     skills: [
       { name: "AWS", icon: <FaAws className="text-[#232F3E]" /> },
+      { name: "Azure", icon: <VscAzure className="text-[#0089D6]" /> },
       { name: "Docker", icon: <SiDocker className="text-[#2496ED]" /> },
       { name: "Kubernetes", icon: <SiKubernetes className="text-[#326CE5]" /> },
       { name: "Cloudflare", icon: <SiCloudflare className="text-[#F38020]" /> },
@@ -78,7 +79,6 @@ const coreExpertise = [
       { name: "Java", icon: <FaJava className="text-[#007396]" /> },
       { name: "Python", icon: <SiPython className="text-[#3776AB]" /> },
       { name: "JavaScript", icon: <SiJavascript className="text-[#F7DF1E]" /> },
-      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
       { name: "C", icon: <SiC className="text-[#A8B9CC]" /> },
     ],
   },
@@ -142,10 +142,10 @@ const About: React.FC = () => (
             className="space-y-4 text-[#2D3A31] text-base md:text-lg leading-relaxed text-left font-medium"
           >
             <p className="first-letter:font-serif first-letter:italic first-letter:font-bold first-letter:text-6xl first-letter:text-[#C27B66] first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:leading-none">
-              I&apos;m <strong className="text-[#2D3A31] font-bold">Yashwanth</strong>, a Computer Science student passionate about software development, problem solving, and building scalable web applications. I work across both frontend and backend technologies with experience in Python, JavaScript, TypeScript, React, and Firebase. I have developed projects including a real-time chat application focused on responsive UI and real-time communication.
+              Computer Science undergraduate with hands-on experience building full-stack and cloud-deployed applications end to end, from React front ends to REST APIs, relational and NoSQL data layers, and containerized deployment pipelines.
             </p>
             <p>
-              I continuously strengthen my problem-solving skills through Data Structures and Algorithms practice on platforms like LeetCode and CodeChef, while also exploring modern web technologies, scalable system design, and efficient software architecture.
+              Proficient in Python with hands-on experience in data analysis and visualization using Pandas, NumPy, and Matplotlib. Experienced with AWS, GCP, Azure, Docker, Kubernetes, and Jenkins-based CI/CD, with a strong interest in AI/ML and building scalable, production-ready applications.
             </p>
           </motion.div>
 

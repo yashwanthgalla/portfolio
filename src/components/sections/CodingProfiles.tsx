@@ -11,10 +11,10 @@ function PerspectiveMarqueeScene() {
   return (
     <PerspectiveMarquee
       items={[
-        "React", "TypeScript", "JavaScript", "HTML5", "CSS3",
-        "Tailwind CSS", "Next.js", "Node.js", "MongoDB", "PostgreSQL",
-        "Git", "AWS", "Figma", "Docker", "Vite",
-        "Kubernetes", "C", "Java", "Firebase", "Cloudflare"
+        "React", "JavaScript", "HTML5", "CSS3",
+        "Tailwind CSS", "Next.js", "MongoDB", "PostgreSQL",
+        "Git", "AWS", "Azure", "Docker", "Vite",
+        "Kubernetes", "C", "Java", "Python", "Firebase", "Cloudflare"
       ]}
       rotateY={-12}
       rotateX={4}
